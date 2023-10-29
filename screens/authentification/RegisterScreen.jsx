@@ -1,113 +1,80 @@
 import React, {useState} from "react";
-import {View, Text, TextInput, TouchableOpacity, Alert} from "react-native";
-import {authentificationStyles} from "../../assets/styles/commonStyles";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import ErrorMsg from "../../components/ErrorMsg";
+import {View, Text, TouchableOpacity, Alert} from "react-native";
+import {authentificationStyles, commonStyles} from "../../assets/styles/commonStyles";
+import Checkbox from 'expo-checkbox';
+import CustomTextInput from "../../components/Input/CustomTextInput";
+import PasswordInput from "../../components/Input/PasswordInput";
+import {useAuth} from "../../context/AuthContext";
 
 /**
  * Registration screen in the authorization stack
- * tbu. with implementation of POST call
  * @author Konstantin K.
  */
 const RegisterScreen = ({navigation}) => {
-  //Input states
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  //Error states if input is empty
-  const [errMail, setErrMail] = useState(false);
-  const [errName, setErrName] = useState(false);
-  const [errPw, setErrPw] = useState(false);
-  const [errPwConf, setErrPwConf] = useState(false);
-  //State to toggle pw input visibility
-  const [showPassword, setShowPassword] = useState(false);
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isChecked, setChecked] = useState(false);
+    const {onLogin, onRegister} = useAuth();
 
-  const handleRegistration = () => {
-    if(username && password && password && !errPwConf){
-      navigation.navigate({
-        name: "Log-In",
-        params: {msg: "Registrierung war erfolgreich!"}
-      })
-    }else{
-      Alert.alert("Fehler","Bitte überprüfe deine Eingaben!");
+    const register = async () => {
+        if (!username || !email || !password || !isChecked) {
+            Alert.alert("Fehler", "Bitte überprüfe deine Eingaben!");
+        } else {
+            const result = await onRegister(email, username, password);
+            if (result && result.error) {
+                alert(result.msg);
+            } else {
+                login();
+            }
+        }
     }
-  };
 
-  return (
-    <View style={authentificationStyles.container}>
-      <Text style={authentificationStyles.header}>Registrieren</Text>
-      <TextInput
-        style={authentificationStyles.inputRegular}
-        placeholder={"Email"}
-        value={email}
-        keyboardType="email-address"
-        autoCapitalize="none"
-        onChangeText={(input) => setEmail(input)}
-        onFocus={() => setErrMail(false)}
-        onEndEditing={() => {setErrMail(email.length === 0)}}
-      />
-      {errMail && (
-        <ErrorMsg/>
-      )}
-      <TextInput
-        style={authentificationStyles.inputRegular}
-        placeholder={"Benutzername"}
-        value={username}
-        onChangeText={(input) => setUsername(input)}
-        onFocus={() => setErrName(false)}
-        onEndEditing={() => {setErrName(username.length === 0)}}
-      />
-      {errName && (
-        <ErrorMsg/>
-      )}
-      <View style={authentificationStyles.inputContainerPw}>
-        <TextInput
-          style={authentificationStyles.inputPw}
-          placeholder="Passwort"
-          secureTextEntry={!showPassword}
-          value={password}
-          onChangeText={(input) => setPassword(input)}
-          onFocus={() => setErrPw(false)}
-          onEndEditing={() => {setErrPw(password.length === 0)}}
-        />
-        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-          <Ionicons
-            name={showPassword ? "md-eye" : "md-eye-off"}
-            style={authentificationStyles.iconPw}
-          />
-        </TouchableOpacity>
-      </View>
-      {errPw && (
-        <ErrorMsg/>
-      )}
-      <View style={authentificationStyles.inputContainerPw}>
-        <TextInput
-          style={authentificationStyles.inputPw}
-          placeholder="Passwort wiederholen"
-          secureTextEntry={!showPassword}
-          onChangeText={(input) => setPasswordConfirmation(input)}
-          onFocus={() => setErrPwConf(false)}
-          onEndEditing={() => {setErrPwConf(!(passwordConfirmation === password))}}
-        />
-        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-          <Ionicons
-            name={showPassword ? "md-eye" : "md-eye-off"}
-            style={authentificationStyles.iconPw}
-          />
-        </TouchableOpacity>
-      </View>
-      {errPwConf && (
-        <ErrorMsg msg={"Passwort stimmt nicht überein!"}/>
-      )}
-      <TouchableOpacity
-        style={authentificationStyles.button}
-        onPress={() => handleRegistration()}
-      >
-        <Text style={authentificationStyles.buttonText}>Registrieren</Text>
-      </TouchableOpacity>
-    </View>
-  )
+    const login = async () => {
+        const result = await onLogin(email, password);
+        if (result && result.error) {
+            alert(result.msg);
+        }else{
+            navigation.navigate({
+                name: "Log-In",
+            });
+        }
+    }
+
+    return (
+        <View style={authentificationStyles.container}>
+            <Text style={authentificationStyles.header}>Registrieren</Text>
+            <CustomTextInput
+                placeholder={"Email"}
+                mailInput={true}
+                onChangeInput={(input) => setEmail(input)}
+                mandatory={true}
+            />
+            <CustomTextInput
+                placeholder={"Benutzername"}
+                onChangeInput={(input) => setUsername(input)}
+                mandatory={true}
+            />
+            <PasswordInput
+                onChangeInput={(input) => setPassword(input)}
+                pwConfirmation={true}
+            />
+            <View style={commonStyles.chkBoxSection}>
+                <Checkbox
+                    value={isChecked}
+                    onValueChange={setChecked}
+                    style={commonStyles.chkBox}
+                />
+                <Text>"Ich bin mindestens 18 Jahre alt"</Text>
+            </View>
+            <TouchableOpacity
+                style={authentificationStyles.button}
+                onPress={register}
+            >
+                <Text style={authentificationStyles.buttonText}>Registrieren</Text>
+            </TouchableOpacity>
+        </View>
+    )
 }
 
 export default RegisterScreen;

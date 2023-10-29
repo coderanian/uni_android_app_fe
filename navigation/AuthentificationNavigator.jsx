@@ -6,7 +6,7 @@ const Stack = createNativeStackNavigator();
  * Authorization navigation via screens stack
  * @author Konstantin K.
  */
-const AuthentificationNavigator = (setUserToken) => {
+const AuthentificationNavigator = () => {
     return (
         <Stack.Navigator
             initialRouteName={"Log-In"}
@@ -18,7 +18,6 @@ const AuthentificationNavigator = (setUserToken) => {
             <Stack.Screen
                 name={"Log-In"}
                 component={Screens.LoginScreen}
-                initialParams={setUserToken}
             />
             <Stack.Screen
                 name={"Forgot Password"}

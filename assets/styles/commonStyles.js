@@ -29,6 +29,17 @@ export const commonStyles = StyleSheet.create({
     msgErr: {
         marginBottom: "5%",
         color: 'red'
+    },
+    chkBoxSection: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: "5%"
+    },
+    chkBox: {
+        marginRight: 8,
+        borderRadius: 5,
+        borderColor: 'black',
+        borderWidth: 1,
     }
 })
 
