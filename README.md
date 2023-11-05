@@ -14,6 +14,11 @@ This wrapper package was bootstrapped with:
 - [expo-checkbox](https://docs.expo.dev/versions/latest/sdk/checkbox/)
 - [expo-constants](https://docs.expo.dev/versions/latest/sdk/constants/)
 - [expo-secure-store](https://docs.expo.dev/versions/latest/sdk/securestore/)
+- [expo-location](https://docs.expo.dev/versions/latest/sdk/location/)
+- [expo-image-picker](https://docs.expo.dev/versions/latest/sdk/imagepicker/)
+- [expo-image-manipulator](https://docs.expo.dev/versions/latest/sdk/imagemanipulator/)
+- [expo-file-system](https://docs.expo.dev/versions/latest/sdk/filesystem/)
+- [base64-js](https://www.npmjs.com/package/base64-js)
 
 ## Structure
 - App.jsx:  root file and starting point of the application
@@ -62,3 +67,13 @@ This wrapper package was bootstrapped with:
 - Used to access Expo host IP address for API-url building
 10. Expo Secure Store:
 - Secure storage API that allows you to store sensitive data, such as authentication tokens, securely on the device
+11. Expo File System:
+- Used for readAsStringAsync to convert b64 to string
+- Seems to use some functions of base64-js
+12. Expo Image Manipulator:
+- Used for compressing and resizing images taken with camera
+13. Expo Image Picker:
+- Used to access native camera functions
+- Can also be used for gallery access, but not implemented here
+14. Expo Location:
+- Used to access native location functions and retrieving geodata of user position

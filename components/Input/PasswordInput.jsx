@@ -1,5 +1,5 @@
 import {TextInput, TouchableOpacity, View} from "react-native";
-import {authentificationStyles} from "../../assets/styles/commonStyles";
+import {authentificationStyles, commonStyles} from "../../assets/styles/commonStyles";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import ErrorMsg from "../ErrorMsg";
 import React, {useState} from "react";
@@ -8,10 +8,11 @@ import React, {useState} from "react";
  * Custom password input field
  * @param onChangeInput Function to return input value to the screen rendering the component
  * @param pwConfirmation renders separate input field for validation if true
+ * @param placeholder additional different placeholder
  * @returns {Element}
  * @author Konstantin K.
  */
-const PasswordInput = ({onChangeInput, pwConfirmation = false}) => {
+const PasswordInput = ({onChangeInput, pwConfirmation = false, placeholder= "Passwort"}) => {
     const [password, setPassword] = useState("");
     const [err, setErr] = useState(false);
     const [passwordConf, setPasswordConf] = useState("");
@@ -37,24 +38,24 @@ const PasswordInput = ({onChangeInput, pwConfirmation = false}) => {
             <View style={authentificationStyles.inputContainerPw}>
                 <TextInput
                     style={authentificationStyles.inputPw}
-                    placeholder={"Passwort"}
+                    placeholder={placeholder}
                     secureTextEntry={!showPassword}
                     value={password}
                     onChangeText={handleInputChange}
                     onFocus={() => setErr(false)}
                     onEndEditing={() => {
-                        setErr(password.length === 0)
+                        setErr(password.length < 5)
                     }}
                 />
                 <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                     <Ionicons
                         name={showPassword ? "md-eye" : "md-eye-off"}
-                        style={authentificationStyles.iconPw}
+                        style={commonStyles.standardIcon}
                     />
                 </TouchableOpacity>
             </View>
             {err && (
-                <ErrorMsg/>
+                <ErrorMsg msg={"Passwort erfordert mindestens 5 Zeichen!"}/>
             )}
             {pwConfirmation && (
                 <View>
@@ -73,7 +74,7 @@ const PasswordInput = ({onChangeInput, pwConfirmation = false}) => {
                         <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                             <Ionicons
                                 name={showPassword ? "md-eye" : "md-eye-off"}
-                                style={authentificationStyles.iconPw}
+                                style={commonStyles.standardIcon}
                             />
                         </TouchableOpacity>
                     </View>

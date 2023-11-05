@@ -3,7 +3,7 @@ import AuthentificationNavigator from "./AuthentificationNavigator";
 import {NavigationContainer} from "@react-navigation/native";
 import LoadingMsg from "../components/LoadingMsg";
 import React from "react";
-import {AuthProvider, useAuth} from "../context/AuthContext";
+import {useAuth} from "../context/AuthContext";
 
 /**
  * Needs to be child of wrapped main app to access AuthContext

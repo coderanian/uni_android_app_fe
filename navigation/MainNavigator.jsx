@@ -1,7 +1,8 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
 import * as Screens from "../screens/index"
+import {Button} from "react-native";
+import ProfileNavigator from "./ProfileNavigator";
 
 /**
  * Main app navigation via bottom tabs with respective icons
@@ -12,18 +13,18 @@ const Tab = createBottomTabNavigator();
 const MainNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName={"Search"}
+      initialRouteName={"Suche"}
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
           switch (route.name) {
-            case 'Search':
+            case 'Suche':
               iconName = focused ? 'md-search' : 'md-search-outline';
               break;
-            case 'Reserved':
+            case 'Reservierungen':
               iconName = focused ? 'md-alarm' : 'md-alarm-outline';
               break;
-            case 'My Offers':
+            case 'Meine Angebote':
               iconName = focused ? 'md-pricetag' : 'md-pricetag-outline';
               break;
             default:
@@ -33,23 +34,29 @@ const MainNavigator = () => {
         },
         tabBarActiveTintColor: '#016400',
         tabBarInactiveTintColor: 'gray',
+        //Show specific submenu header in each sub-navigation route instead
+        headerShown: false,
+        tabBarHideOnKeyboard: true
       })}
     >
       <Tab.Screen
-        name={"Search"}
+        name={"Suche"}
         component={Screens.SearchScreen}
+        options={{
+          headerRight: () => <Button onPress={onLogout} title={"Ausloggen"}/>
+        }}
       />
       <Tab.Screen
-        name={"Reserved"}
+        name={"Reservierungen"}
         component={Screens.ReservedScreen}
       />
       <Tab.Screen
-        name={"My Offers"}
+        name={"Meine Angebote"}
         component={Screens.StockScreen}
       />
       <Tab.Screen
-        name={"My profile"}
-        component={Screens.ProfileScreen}
+        name={"Mein Profil"}
+        component={ProfileNavigator}
       />
     </Tab.Navigator>
   );

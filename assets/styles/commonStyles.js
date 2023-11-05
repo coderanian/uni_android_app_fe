@@ -9,7 +9,6 @@ export const commonStyles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'skyblue'
     },
     header: {
         fontSize: 25,
@@ -40,8 +39,22 @@ export const commonStyles = StyleSheet.create({
         borderRadius: 5,
         borderColor: 'black',
         borderWidth: 1,
+    },
+    navHeader: {
+        borderBottomColor: 'lightgrey',
+        borderBottomWidth: 0.5,
+        shadowColor: 'lightgrey',
+        shadowOffset: 1
+    },
+    activeIcon: {
+        color: '#016400'
+    },
+    standardIcon: {
+        paddingRight: "5%",
+        fontSize: 24,
+        color: 'gray'
     }
-})
+});
 
 export const authentificationStyles = StyleSheet.create({
     container: {
@@ -81,9 +94,10 @@ export const authentificationStyles = StyleSheet.create({
     },
     button: {
         width: '100%',
-        backgroundColor: 'black',
+        backgroundColor: 'grey',
         padding: 15,
         borderRadius: 5,
+        marginBottom: "5%"
     },
     buttonText: {
         color: 'white',
@@ -97,4 +111,47 @@ export const authentificationStyles = StyleSheet.create({
         color: 'black',
         textDecorationLine: 'underline',
     }
-})
+});
+
+export const profileStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    body: {
+        backgroundColor: 'white',
+        paddingHorizontal: "10%",
+    },
+    headerContainer: {
+        flexDirection: "row",
+        paddingVertical: "5%",
+        flex: 1,
+    },
+    textContainer: {
+        paddingRight: "40%",
+    },
+    propertyValue: {
+        fontWeight: "bold",
+        fontSize: 18,
+    },
+    imgContainer: {
+        flex: 1,
+        aspectRatio: 1,
+        resizeMode: 'contain',
+        borderRadius: 350
+    },
+    imgEditContainer: {
+        alignSelf: 'center',
+        width: 200,
+        height: 200,
+        marginVertical: "5%",
+        borderRadius: 150
+    },
+    detailsContainer: {
+        paddingBottom: "5%"
+    },
+    mapContainer: {
+        marginVertical: "5%",
+        width: "100%",
+        height: 300,
+    },
+});

@@ -16,14 +16,13 @@ const RegisterScreen = ({navigation}) => {
     const [password, setPassword] = useState('');
     const [isChecked, setChecked] = useState(false);
     const {onLogin, onRegister} = useAuth();
-
     const register = async () => {
         if (!username || !email || !password || !isChecked) {
             Alert.alert("Fehler", "Bitte überprüfe deine Eingaben!");
         } else {
             const result = await onRegister(email, username, password);
             if (result && result.error) {
-                alert(result.msg);
+                Alert.alert(result.status, result.msg);
             } else {
                 login();
             }
