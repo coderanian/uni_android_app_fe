@@ -6,8 +6,6 @@ import * as SecureStore from 'expo-secure-store';
 const TOKEN_KEY = 'jwt';
 //Creates context object to pass data related to authentication throughout the component tree
 const AuthContext = createContext(null);
-//Wraps components and allows them to access the authentication-related context data
-const {Provider} = AuthContext;
 
 export const useAuth = () => {
     return useContext(AuthContext);

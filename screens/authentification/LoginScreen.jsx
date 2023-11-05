@@ -1,16 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, { useState} from "react";
 import {View, Text, TouchableOpacity, Alert} from "react-native";
 import {authentificationStyles} from "../../assets/styles/commonStyles";
 import CustomTextInput from "../../components/Input/CustomTextInput";
 import PasswordInput from "../../components/Input/PasswordInput";
 import {useAuth} from "../../context/AuthContext";
-import {apiUriFactory} from "../../services/apiUriFactory";
 
 /**
  * Main log-in screen in the authorization stack
  * @author Konstantin K.
  */
-const LoginScreen = ({navigation, route}) => {
+const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     //State to toggle message rendering in case pw changed or registration completed

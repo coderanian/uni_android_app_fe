@@ -16,13 +16,6 @@ import React, {useState} from "react";
 const CustomTextInput = ({placeholder, onChangeInput, mailInput= false, mandatory=false, errMsg='Pflichtfeld'}) => {
     const [inputVal, setInputVal] = useState("");
     const [err, setErr] = useState(false);
-    //Pass the state to the screen for further processing
-    const handleInputChange = (input) => {
-        setInputVal(input);
-        if(onChangeInput && !err) {
-            onChangeInput(input)
-        }
-    }
 
     const validateInput = () => {
         let check = inputVal.length === 0;
