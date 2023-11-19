@@ -7,10 +7,10 @@ import MapView, {Marker} from 'react-native-maps';
 import defaultAvatar from "../../assets/images/avatar_template.jpg";
 
 const ProfileScreen = ({navigation}) => {
-    const {onGetUser, onLogout, onGetOfferCnt} = useAuth(); // Access the getUser function and authState from the context
+    const {onGetUser, onLogout} = useAuth(); // Access the getUser function and authState from the context
     const [isLoading, setIsLoading] = useState(true);
-    const [userData, setUserData] = useState([]);
-    const [offerCnt, setOfferCnt] = useState(0);
+    const [userData, setUserData] = useState(null);
+    const [offerCnt, setOfferCnt] = useState(null);
     const [region, setRegion] = useState(null);
 
     //Retrieve user properties with token on screen focus / mounting
@@ -18,20 +18,18 @@ const ProfileScreen = ({navigation}) => {
         const unsubscribe = navigation.addListener('focus', () => {
             const loadUser = async () => {
                 const result = await onGetUser();
-                setIsLoading(false);
                 if (result && result.error) {
-                    if (result.status === 403 || result.status === 500 ) {
+                    if (['403', '500'].includes(result.status.toString())) {
                         onLogout();
                         Alert.alert("Login","Login abgelaufen.")
                     }else{
                         Alert.alert(result.status, result.msg);
                     }
                 } else {
-                    console.log(result.data.location);
-                    setUserData(result.data);
+                    setUserData(result.data.user);
+                    setOfferCnt(result.data.offerCnt);
+                    setIsLoading(false);
                 }
-                const offers = await onGetOfferCnt();
-                (offers && offers.error) ? Alert.alert(offers.status, offers.msg) : setOfferCnt(offers.data);
             };
             //GET request on initial screen mount
             loadUser();
@@ -40,7 +38,7 @@ const ProfileScreen = ({navigation}) => {
     }, [navigation]);
 
     useEffect(() => {
-        if(userData.location){
+        if(userData && userData.location){
             setRegion({
                 latitude: userData.location.latitude,
                 longitude: userData.location.longitude,

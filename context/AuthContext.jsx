@@ -87,7 +87,6 @@ export const AuthProvider = ({children}) => {
      */
     const putUser = async (name, email, password, picture, location) => {
         try {
-            //let user = await SecureStore.getItemAsync(USER_ID_KEY);
             return await axios.put(apiUriFactory(
                 "my-profile"),
                 {name, email, password, picture, location}
@@ -108,7 +107,6 @@ export const AuthProvider = ({children}) => {
         } catch (e) {
             return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
         }
-
     }
 
     /**
@@ -121,15 +119,12 @@ export const AuthProvider = ({children}) => {
     const login = async (email, password) => {
         try {
             const result = await axios.post(apiUriFactory('login'), {email, password});
-            //console.log('Login result: ', result.data.id);
             setAuthState({
                 token: result.data.token,
                 authenticated: true
             });
             axios.defaults.headers.common['Authorization'] = `Bearer ${result.data.token}`;
             await SecureStore.setItemAsync(TOKEN_KEY, result.data.token);
-            //Only string can be stored
-            //await SecureStore.setItemAsync(USER_ID_KEY, result.data.id.toString());
             return result;
         } catch (e) {
             return {error: true, status: e.response.status.toString(), msg: e.response.data};
@@ -151,6 +146,71 @@ export const AuthProvider = ({children}) => {
     }
 
     /**
+     * Sends post request with offer details for new offer
+     * @returns {Promise<void>}
+     * @author Konstantin K.
+     */
+    const postOffer = async (
+        title, description, category, quantity, priceType, price, productPic
+    ) => {
+        try {
+            return await axios.post(apiUriFactory(
+                    "offers"),
+                {title, description, category, quantity, priceType, price, productPic}
+            );
+        } catch (e) {
+            return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
+        }
+    }
+
+    /**
+     * Sends put request with offer details for new offer
+     * @returns {Promise<void>}
+     * @author Konstantin K.
+     */
+    const putOffer = async (
+        offerId, title, description, category, quantity, priceType, price, productPic
+    ) => {
+        try {
+            return await axios.put(apiUriFactory(
+                    `offers/${offerId}`),
+                {title, description, category, quantity, priceType, price, productPic}
+            );
+        } catch (e) {
+            return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
+        }
+    }
+
+    /**
+     * Sends delete request with for existing offer
+     * @returns {Promise<void>}
+     * @author Konstantin K.
+     */
+    const deleteOffer = async (offerId, sold) => {
+        try {
+            return await axios.delete(
+                apiUriFactory(`offers/${offerId}`),
+                {params: {sold: sold}}
+            );
+        } catch (e) {
+            return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
+        }
+    }
+
+    /**
+     * Retrieves array of offers created by the user
+     * @returns {Promise<void>}
+     * @author Konstantin K.
+     */
+    const getMyOffers = async() => {
+        try {
+            return await axios.get(apiUriFactory("offers/my-offers"));
+        } catch (e) {
+            return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
+        }
+    }
+
+    /**
      * Make functions for server communication available in app
      */
     const value = {
@@ -160,6 +220,10 @@ export const AuthProvider = ({children}) => {
         onGetUser: getUser,
         onPutUser: putUser,
         onGetOfferCnt: getUserOfferCnt,
+        onPostOffer: postOffer,
+        onGetMyOffers: getMyOffers,
+        onPutOffer: putOffer,
+        onDeleteOffer: deleteOffer,
         authState,
         isTokenLoaded
     }

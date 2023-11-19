@@ -19,6 +19,8 @@ This wrapper package was bootstrapped with:
 - [expo-image-manipulator](https://docs.expo.dev/versions/latest/sdk/imagemanipulator/)
 - [expo-file-system](https://docs.expo.dev/versions/latest/sdk/filesystem/)
 - [base64-js](https://www.npmjs.com/package/base64-js)
+- [react-native-picker](https://docs.expo.dev/versions/latest/sdk/picker/)
+- [react-native-popup-menu](https://github.com/instea/react-native-popup-menu)
 
 ## Structure
 - App.jsx:  root file and starting point of the application
@@ -77,3 +79,7 @@ This wrapper package was bootstrapped with:
 - Can also be used for gallery access, but not implemented here
 14. Expo Location:
 - Used to access native location functions and retrieving geodata of user position
+15. React-Native-Picker:
+- Dropdown selection input box
+16. React-Native-Popup-Menu:
+- Custom popup menu in offers
