@@ -53,6 +53,19 @@ export const commonStyles = StyleSheet.create({
         paddingRight: "5%",
         fontSize: 24,
         color: 'gray'
+    },
+    dropboxSelection: {
+        width: '100%',
+        borderWidth: 1,
+        marginBottom: "5%",
+        borderRadius: 5,
+
+    },
+    dropboxItem: {
+        fontSize: 14
+    },
+    title: {
+        paddingBottom: 5
     }
 });
 
@@ -132,6 +145,7 @@ export const profileStyles = StyleSheet.create({
     propertyValue: {
         fontWeight: "bold",
         fontSize: 18,
+        textTransform: "capitalize"
     },
     imgContainer: {
         flex: 1,
@@ -155,3 +169,34 @@ export const profileStyles = StyleSheet.create({
         height: 300,
     },
 });
+
+export const stockStyles = StyleSheet.create({
+    container: {
+        backgroundColor: "white",
+        flex: 1,
+    },
+    btnContainer: {
+        position: "absolute",
+        width: '100%',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: "10%"
+    },
+    button: {
+        width: '100%',
+        padding: 15,
+        borderRadius: 5,
+        marginBottom: "5%",
+        backgroundColor: '#016400',
+    },
+    imgTemplate: {
+        alignSelf: 'center',
+        width: 200,
+        height: 200,
+        marginVertical: "5%",
+        backgroundColor: 'grey'
+    }
+})

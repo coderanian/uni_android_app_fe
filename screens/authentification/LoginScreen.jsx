@@ -15,23 +15,13 @@ const LoginScreen = ({navigation}) => {
     //State to toggle message rendering in case pw changed or registration completed
     const {onLogin} = useAuth();
 
-    /*
-    useEffect(() => {
-        const loadUser = async () => {
-            const result = await axios.get(apiUriFactory('users'));
-            console.log('Result: ', result);
-        };
-        testCall();
-    }, []);
-    */
-
     const login = async () => {
         if (!email || !password) {
             Alert.alert("Fehler", "Bitte überprüfe deine Eingaben!");
         } else {
             const result = await onLogin(email, password);
             if (result && result.error) {
-                alert(result.msg);
+                Alert.alert(result.status, result.msg);
             }
         }
     }

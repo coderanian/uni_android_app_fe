@@ -37,8 +37,8 @@ const CustomTextInput = ({
             <TextInput
                 style={authentificationStyles.inputRegular}
                 placeholder={placeholder}
-                defaultValue={placeholder}
                 autoCapitalize={"none"}
+                inputMode={mailInput ? 'email' : 'text'}
                 value={inputVal}
                 onChangeText={(input) => setInputVal(input)}
                 onFocus={() => setErr(false)}

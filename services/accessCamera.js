@@ -12,7 +12,7 @@ export async function accessCamera () {
     if (!camResp.canceled) {
         const resizedPic = await ImageManipulator.manipulateAsync(
             camResp.assets[0].uri,
-            [{resize: {width: 150, height: 150}}],
+            [{resize: {width: 150}}],
             {compress: 0.7, format: 'jpeg'}
         )
         return await picToBase64(resizedPic.uri);

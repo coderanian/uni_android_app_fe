@@ -41,20 +41,17 @@ const EditProfileScreen = ({navigation}) => {
         const unsubscribe = navigation.addListener('focus', () => {
             const loadUser = async () => {
                 const result = await onGetUser();
-                setIsLoading(false);
                 if (result && result.error) {
-                    if (result.status === 403 || result.status === 500 ) {
+                    if (['403', '500'].includes(result.status.toString())) {
                         onLogout();
                         Alert.alert("Login","Login abgelaufen.")
                     }else{
                         Alert.alert(result.status, result.msg);
                     }
                 } else {
-                    console.log(result.data.location);
-                    setUserData(result.data);
+                    setUserData(result.data.user);
+                    setIsLoading(false);
                 }
-                const offers = await onGetOfferCnt();
-                (offers && offers.error) ? Alert.alert(offers.status, offers.msg) : setOfferCnt(offers.data);
             };
             //GET request on initial screen mount
             loadUser();
@@ -83,7 +80,6 @@ const EditProfileScreen = ({navigation}) => {
     }, [location]);
 
     const update = async () => {
-        console.log(name, email, password, picture, location);
         const result = await onPutUser(name, email, password, picture, location);
         if (result && result.error) {
             Alert.alert(result.status, result.msg);
