@@ -1,91 +1,61 @@
-import React, {useEffect, useState} from "react";
-import {View, Text, TextInput, TouchableOpacity, Alert} from "react-native";
+import React, { useState} from "react";
+import {View, Text, TouchableOpacity, Alert} from "react-native";
 import {authentificationStyles} from "../../assets/styles/commonStyles";
-import ErrorMsg from "../../components/ErrorMsg";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import CustomTextInput from "../../components/Input/CustomTextInput";
+import PasswordInput from "../../components/Input/PasswordInput";
+import {useAuth} from "../../context/AuthContext";
 
-/**r
+/**
  * Main log-in screen in the authorization stack
- * tbu. with implementation of actual token-based authorization
  * @author Konstantin K.
  */
-const LoginScreen = ({navigation, route}) => {
-    const [username, setUsername] = useState("");
+const LoginScreen = ({navigation}) => {
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    //Error states if input is empty
-    const [errName, setErrName] = useState(false);
-    const [errPw, setErrPw] = useState(false);
-    //State to toggle pw input visibility
-    const [showPassword, setShowPassword] = useState(false);
     //State to toggle message rendering in case pw changed or registration completed
-    const [msg, setMsg] = useState(false);
-    const {setUserToken} = route.params;
+    const {onLogin} = useAuth();
 
+    /*
     useEffect(() => {
-        setMsg(route.params?.msg ? route.params?.msg : null);
-    }, [route.params]);
+        const loadUser = async () => {
+            const result = await axios.get(apiUriFactory('users'));
+            console.log('Result: ', result);
+        };
+        testCall();
+    }, []);
+    */
 
-    //Token-based authorization tbu.
-    const handleSignIn = () => {
-        if (username && password) {
-            let token = 'token';
-            setUserToken(token)
-        } else {
+    const login = async () => {
+        if (!email || !password) {
             Alert.alert("Fehler", "Bitte überprüfe deine Eingaben!");
+        } else {
+            const result = await onLogin(email, password);
+            if (result && result.error) {
+                alert(result.msg);
+            }
         }
-    };
+    }
 
     return (
         <View style={authentificationStyles.container}>
             <Text style={authentificationStyles.header}>Einloggen</Text>
-            {msg && (
-                <Text style={authentificationStyles.body}>{route.params.msg}</Text>
-            )}
-            <TextInput
-                style={authentificationStyles.inputRegular}
-                placeholder={"Benutzername"}
-                value={username}
-                onChangeText={(input) => setUsername(input)}
-                onFocus={() => setErrName(false)}
-                onEndEditing={() => {
-                    setErrName(username.length === 0)
-                }}
+            <CustomTextInput
+                placeholder={"Email"}
+                mailInput={true}
+                onChangeInput={(input) => setEmail(input)}
             />
-            {errName && (
-                <ErrorMsg/>
-            )}
-            <View style={authentificationStyles.inputContainerPw}>
-                <TextInput
-                    style={authentificationStyles.inputPw}
-                    placeholder="Password"
-                    secureTextEntry={!showPassword}
-                    value={password}
-                    onChangeText={(input) => setPassword(input)}
-                    onFocus={() => setErrPw(false)}
-                    onEndEditing={() => {
-                        setErrPw(password.length === 0)
-                    }}
-                />
-                <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                    <Ionicons
-                        name={showPassword ? "md-eye" : "md-eye-off"}
-                        style={authentificationStyles.iconPw}
-                    />
-                </TouchableOpacity>
-            </View>
-            {errPw && (
-                <ErrorMsg/>
-            )}
+            <PasswordInput
+                onChangeInput={(input) => setPassword(input)}
+            />
             <TouchableOpacity
                 style={authentificationStyles.button}
-                onPress={handleSignIn}
+                onPress={login}
             >
                 <Text style={authentificationStyles.buttonText}>Einloggen</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={authentificationStyles.buttonLink}
                 onPress={() => {
-                    setMsg(null);
                     navigation.navigate("Forgot Password");
                 }}
             >
@@ -94,7 +64,6 @@ const LoginScreen = ({navigation, route}) => {
             <TouchableOpacity
                 style={authentificationStyles.buttonLink}
                 onPress={() => {
-                    setMsg(null);
                     navigation.navigate('Register')
                 }}
             >
