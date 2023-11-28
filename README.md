@@ -35,6 +35,7 @@ This wrapper package was bootstrapped with:
 - /services: utility functions, modules, or services that provide specific functionality (API integrations, data handling, etc.)
 - /utils: helper modules / functions to reuse across the application
 
+
 ## Installation
 1. Application is using Expo for its build and testing, so you have to install Expo CLI
 2. Run npm i to install all the dependencies.
