@@ -200,3 +200,39 @@ export const stockStyles = StyleSheet.create({
         backgroundColor: 'grey'
     }
 })
+
+export const searchStyles = StyleSheet.create({
+    button: {
+        width: '100%',
+        padding: 15,
+        borderRadius: 5,
+        marginBottom: "5%",
+        marginTop: "5%",
+        minWidth: "100%",
+        display: "block",
+        backgroundColor: '#016400'
+    },
+    buttoncancel: {
+        width: '100%',
+        padding: 15,
+        borderRadius: 5,
+        marginBottom: "5%",
+        marginTop: "5%",
+        minWidth: "100%",
+        display: "block",
+        backgroundColor: '#ff0000'
+    },
+    buttonText: {
+        color:'#fff',
+        textAlign:'center',
+    },
+    btnDetails: {
+        fontSize: 24
+    },
+    iconContainer: {
+        position: "absolute",
+        top: 0,
+        right: 0,
+        padding: 15,
+    }
+})

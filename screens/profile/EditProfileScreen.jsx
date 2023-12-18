@@ -49,7 +49,7 @@ const EditProfileScreen = ({navigation}) => {
                         Alert.alert(result.status, result.msg);
                     }
                 } else {
-                    setUserData(result.data.user);
+                    setUserData(result.data);
                     setIsLoading(false);
                 }
             };

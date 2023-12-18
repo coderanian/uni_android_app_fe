@@ -34,7 +34,6 @@ export const AuthProvider = ({children}) => {
     useEffect(() => {
         const loadToken = async () => {
             const token = await SecureStore.getItemAsync(TOKEN_KEY);
-            //console.log("Stored token: ", token);
             if (token) {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                 setAuthState({
@@ -62,7 +61,6 @@ export const AuthProvider = ({children}) => {
                 {email, name, password}
             );
         } catch (e) {
-            console.log(e.response.data)
             return {error: true, status: e.response.status.toString(), msg: e.response.data};
         }
     };
@@ -74,7 +72,7 @@ export const AuthProvider = ({children}) => {
      */
     const getUser = async () => {
         try {
-            return await axios.get(apiUriFactory("my-profile"))
+            return await axios.get(apiUriFactory("profile"))
         } catch (e) {
             return {error: true, status: e.response.status.toString(), msg: e.response.data};
         }
@@ -88,22 +86,9 @@ export const AuthProvider = ({children}) => {
     const putUser = async (name, email, password, picture, location) => {
         try {
             return await axios.put(apiUriFactory(
-                "my-profile"),
+                "profile"),
                 {name, email, password, picture, location}
             );
-        } catch (e) {
-            return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
-        }
-    }
-
-    /**
-     * Fetch offer count of user id
-     * @returns server response
-     * @author Konstantin K.
-     */
-    const getUserOfferCnt = async () => {
-        try {
-            return await axios.get(apiUriFactory("my-profile/offer-count"));
         } catch (e) {
             return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
         }
@@ -210,6 +195,38 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+    const getOffers = async (location) => {
+        try {
+            return await axios.get(apiUriFactory("offers"), { params: { lat: location.latitude, lon: location.longitude, radius: 1.0 } });
+        } catch (e) {
+            return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
+        }
+    }
+
+    const reserveOffer = async (offerId) => {
+        try {
+            return await axios.post(apiUriFactory(`reservations/${offerId}`));
+        } catch (e) {
+            return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
+        }
+    }
+
+    const cancelReservation = async (reservationId) => {
+        try {
+            return await axios.put(apiUriFactory(`reservations/${reservationId}/unreserve`));
+        } catch (e) {
+            return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
+        }
+    }
+
+    const getReservationList = async () => {
+        try {
+            return await axios.get(apiUriFactory("reservations"));
+        } catch (e) {
+            return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
+        }
+    }
+
     /**
      * Make functions for server communication available in app
      */
@@ -219,11 +236,14 @@ export const AuthProvider = ({children}) => {
         onLogout: logout,
         onGetUser: getUser,
         onPutUser: putUser,
-        onGetOfferCnt: getUserOfferCnt,
         onPostOffer: postOffer,
         onGetMyOffers: getMyOffers,
         onPutOffer: putOffer,
         onDeleteOffer: deleteOffer,
+        onGetOffers: getOffers,
+        onReserveOffer: reserveOffer,
+        onCancelReservation: cancelReservation,
+        onGetReservationList: getReservationList,
         authState,
         isTokenLoaded
     }

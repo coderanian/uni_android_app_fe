@@ -10,8 +10,8 @@ const ProfileScreen = ({navigation}) => {
     const {onGetUser, onLogout} = useAuth(); // Access the getUser function and authState from the context
     const [isLoading, setIsLoading] = useState(true);
     const [userData, setUserData] = useState(null);
-    const [offerCnt, setOfferCnt] = useState(null);
     const [region, setRegion] = useState(null);
+
 
     //Retrieve user properties with token on screen focus / mounting
     useEffect(() => {
@@ -26,8 +26,7 @@ const ProfileScreen = ({navigation}) => {
                         Alert.alert(result.status, result.msg);
                     }
                 } else {
-                    setUserData(result.data.user);
-                    setOfferCnt(result.data.offerCnt);
+                    setUserData(result.data);
                     setIsLoading(false);
                 }
             };
@@ -62,7 +61,7 @@ const ProfileScreen = ({navigation}) => {
                                 </Text>
                                 <Text>Aktive Angebote</Text>
                                 <Text style={profileStyles.propertyValue}>
-                                    {offerCnt}
+                                    {userData.offersCount}
                                 </Text>
                             </View>
                             <Image

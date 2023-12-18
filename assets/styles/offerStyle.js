@@ -2,13 +2,16 @@ import {StyleSheet} from "react-native";
 
 export const offerStyle = StyleSheet.create({
     container: {
-        flexDirection: "row",
-        alignItems: "center",
         paddingHorizontal: "10%",
         paddingVertical: "5%",
         backgroundColor: "white",
         borderBottomWidth: 1,
         borderBottomColor: "grey",
+    },
+    innercontainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        flexWrap: "wrap",
     },
     img: {
         width: 90,
