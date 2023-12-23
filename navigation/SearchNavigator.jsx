@@ -1,33 +1,39 @@
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import * as Screens from "../screens";
-import {TouchableOpacity, View} from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {commonStyles} from "../assets/styles/commonStyles";
 import * as React from "react";
+import {Menu, MenuOption, MenuOptions, MenuProvider, MenuTrigger} from "react-native-popup-menu";
 
 const Stack = createNativeStackNavigator();
 
 const SearchNavigator = ({navigation}) => {
     return (
+        <MenuProvider>
         <Stack.Navigator>
             <Stack.Screen
                 name="Angebote"
                 component={Screens.SearchScreen}
                 options={{
                     headerRight: () => (
-                        <View style={{flexDirection: "row"}}>
-                            <TouchableOpacity onPress={() => (console.log("Kaching!"))}>
+                        <Menu>
+                            <MenuTrigger>
                                 <Ionicons name="md-arrow-down" style={commonStyles.standardIcon}/>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => (console.log("Kaching!"))}>
-                                <Ionicons name="md-filter" style={commonStyles.standardIcon}/>
-                            </TouchableOpacity>
-                        </View>
+                            </MenuTrigger>
+                            <MenuOptions>
+                                <MenuOption onSelect={() => console.log('TEsst')} text="Filter Option 1" />
+                                <MenuOption onSelect={() => console.log('TEsst')} text="Filter Option 2" />
+                                {/* Weitere Menüoptionen hier hinzufügen */}
+                            </MenuOptions>
+                        </Menu>
+
+
                     )
                 }}
             />
             <Stack.Screen name={"Angebotdetails"} component={Screens.SearchDetailScreen}/>
         </Stack.Navigator>
+        </MenuProvider>
     )
 }
 export default SearchNavigator;

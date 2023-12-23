@@ -3,14 +3,13 @@ import React, {useEffect, useState} from "react";
 import {useAuth} from "../../context/AuthContext";
 import LoadingMsg from "../../components/LoadingMsg";
 import {profileStyles} from "../../assets/styles/commonStyles";
-import MapView, {Marker} from 'react-native-maps';
 import defaultAvatar from "../../assets/images/avatar_template.jpg";
+import MapComponent from "../../components/MapComponent";
 
 const ProfileScreen = ({navigation}) => {
     const {onGetUser, onLogout} = useAuth(); // Access the getUser function and authState from the context
     const [isLoading, setIsLoading] = useState(true);
     const [userData, setUserData] = useState(null);
-    const [region, setRegion] = useState(null);
 
 
     //Retrieve user properties with token on screen focus / mounting
@@ -20,7 +19,6 @@ const ProfileScreen = ({navigation}) => {
                 const result = await onGetUser();
                 if (result && result.error) {
                     if (['403', '500'].includes(result.status.toString())) {
-                        onLogout();
                         Alert.alert("Login","Login abgelaufen.")
                     }else{
                         Alert.alert(result.status, result.msg);
@@ -35,17 +33,6 @@ const ProfileScreen = ({navigation}) => {
         })
         return unsubscribe;
     }, [navigation]);
-
-    useEffect(() => {
-        if(userData && userData.location){
-            setRegion({
-                latitude: userData.location.latitude,
-                longitude: userData.location.longitude,
-                latitudeDelta: 0.005,
-                longitudeDelta: 0.005,
-            }
-        )}
-    }, [userData])
 
     return (
         <View style={profileStyles.container}>
@@ -87,17 +74,7 @@ const ProfileScreen = ({navigation}) => {
                                 {!userData.location ? (
                                         <Text style={profileStyles.propertyValue}>Standort nicht gesetzt!</Text>
                                     ) : (
-                                        <MapView
-                                            style={profileStyles.mapContainer}
-                                            region={region}
-                                        >
-                                            <Marker
-                                                coordinate={{
-                                                    latitude: userData.location.latitude,
-                                                    longitude: userData.location.longitude,
-                                                }}
-                                            />
-                                        </MapView>
+                                        <MapComponent location={userData.location}></MapComponent>
                                     )
                                 }
                             </View>

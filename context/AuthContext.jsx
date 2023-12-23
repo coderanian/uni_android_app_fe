@@ -139,11 +139,13 @@ export const AuthProvider = ({children}) => {
         title, description, category, quantity, priceType, price, productPic
     ) => {
         try {
+            console.log("test");
             return await axios.post(apiUriFactory(
                     "offers"),
                 {title, description, category, quantity, priceType, price, productPic}
             );
         } catch (e) {
+            console.log(e);
             return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
         }
     }

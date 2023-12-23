@@ -7,7 +7,7 @@ import Offer from "../../components/Offer/Offer";
 import {accessLocation} from "../../services/accessLocation";
 
 const SearchScreen = ({navigation}) => {
-    const {onGetOffers, onLogout} = useAuth();
+    const {onGetOffers} = useAuth();
     const [offerList, setOfferList] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -15,12 +15,11 @@ const SearchScreen = ({navigation}) => {
         const unsubscribe = navigation.addListener('focus', () => {
             const loadOffers = async () => {
                 const location = await accessLocation();
-                console.log(location)
                 const result = await onGetOffers(location);
                 if (result && result.error) {
                     if (['403', '500'].includes(result.status.toString())) {
-                        onLogout();
-                        Alert.alert("Login", "Login abgelaufen.")
+                      //  onLogout();
+                        Alert.alert(result)
                     } else {
                         Alert.alert(result.status, result.msg);
                     }

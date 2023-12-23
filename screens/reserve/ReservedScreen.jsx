@@ -6,7 +6,7 @@ import LoadingMsg from "../../components/LoadingMsg";
 import Offer from "../../components/Offer/Offer";
 
 const ReservedScreen = ({navigation}) => {
-    const {onGetReservationList, onLogout} = useAuth();
+    const {onGetReservationList} = useAuth();
     const [offerList, setOfferList] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
