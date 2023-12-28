@@ -6,7 +6,7 @@ import LoadingMsg from "../../components/LoadingMsg";
 import Offer from "../../components/Offer/Offer";
 
 const ReservedScreen = ({navigation}) => {
-    const {onGetReservationList} = useAuth();
+    const {onGetReservationList, onLogout} = useAuth();
     const [offerList, setOfferList] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -21,8 +21,7 @@ const ReservedScreen = ({navigation}) => {
                 const result = await onGetReservationList();
                 if (result && result.error) {
                     if (['403', '500'].includes(result.status.toString())) {
-                       // onLogout();
-                        console.log(result)
+                        onLogout();
                         Alert.alert("Login", "Login abgelaufen.")
                     } else {
                         Alert.alert(result.status, result.msg);

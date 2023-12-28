@@ -19,6 +19,7 @@ const ProfileScreen = ({navigation}) => {
                 const result = await onGetUser();
                 if (result && result.error) {
                     if (['403', '500'].includes(result.status.toString())) {
+                        onLogout();
                         Alert.alert("Login","Login abgelaufen.")
                     }else{
                         Alert.alert(result.status, result.msg);

@@ -4,14 +4,13 @@ import MapView, {Marker} from "react-native-maps";
 const MapComponent = ({location}) => {
 
     const region = {
-        latitude: location.latitude,
-        longitude: location.longitude,
+        latitude: location?.latitude ?? 0,
+        longitude: location?.longitude ?? 0,
         latitudeDelta: 0.005,
         longitudeDelta: 0.005,
     }
 
-
-    return(
+    return (
         <MapView
             style={profileStyles.mapContainer}
             region={region}

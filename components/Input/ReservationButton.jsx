@@ -7,13 +7,14 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import {searchStyles} from "../../assets/styles/commonStyles";
 
 const ReservationButton = ({offer, onCancel}) => {
-    const {onReserveOffer, onCancelReservation} = useAuth();
+    const {onReserveOffer, onCancelReservation, onLogout} = useAuth();
     const [remainingTime, setRemainingTime] = useState(calcTime(offer.reservation?.reservationTimestamp ?? null));
 
     const reserveOffer = async () => {
         const result = await onReserveOffer(offer.offerId);
         if(result && result.error){
             if (result.status.toString() === '403') {
+                onLogout();
                 Alert.alert("Login","Login abgelaufen.")
             }else{
                 Alert.alert(result.status, result.msg);
@@ -28,6 +29,7 @@ const ReservationButton = ({offer, onCancel}) => {
         const result = await onCancelReservation(offer.reservation.reservationId);
         if(result && result.error){
             if (result.status.toString() === '403') {
+                onLogout();
                 Alert.alert("Login","Login abgelaufen.")
             }else{
                 Alert.alert(result.status, result.msg);
