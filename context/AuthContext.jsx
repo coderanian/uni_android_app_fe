@@ -83,11 +83,11 @@ export const AuthProvider = ({children}) => {
      * @returns server response
      * @author Konstantin K.
      */
-    const putUser = async (name, email, password, picture, location) => {
+    const putUser = async (name, email, newPassword, picture, location) => {
         try {
             return await axios.put(apiUriFactory(
                 "profile"),
-                {name, email, password, picture, location}
+                {name, email, newPassword, picture, location}
             );
         } catch (e) {
             return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
