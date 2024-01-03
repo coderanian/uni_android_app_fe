@@ -54,6 +54,11 @@ export const commonStyles = StyleSheet.create({
         fontSize: 24,
         color: 'gray'
     },
+    emptyIcon: {
+        margin: "auto",
+        fontSize: 96,
+        color: 'gray'
+    },
     dropboxSelection: {
         width: '100%',
         borderWidth: 1,
@@ -66,6 +71,10 @@ export const commonStyles = StyleSheet.create({
     },
     title: {
         paddingBottom: 5
+    },
+    filterList: {
+        paddingHorizontal: 15,
+        paddingTop: 15
     }
 });
 

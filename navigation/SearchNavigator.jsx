@@ -1,39 +1,34 @@
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import * as Screens from "../screens";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import {commonStyles} from "../assets/styles/commonStyles";
-import * as React from "react";
-import {Menu, MenuOption, MenuOptions, MenuProvider, MenuTrigger} from "react-native-popup-menu";
+import React from "react";
+import Filter from "../components/Filter/Filter";
+import {View} from "react-native";
+import SortComponent from "../components/SortComponent";
 
 const Stack = createNativeStackNavigator();
 
 const SearchNavigator = ({navigation}) => {
+    const filterParams = {searchRadius: 1, types: [], categories: []};
+
     return (
-        <MenuProvider>
         <Stack.Navigator>
             <Stack.Screen
                 name="Angebote"
                 component={Screens.SearchScreen}
-                options={{
+                initialParams={filterParams}
+                options={({ navigation }) => ({
                     headerRight: () => (
-                        <Menu>
-                            <MenuTrigger>
-                                <Ionicons name="md-arrow-down" style={commonStyles.standardIcon}/>
-                            </MenuTrigger>
-                            <MenuOptions>
-                                <MenuOption onSelect={() => console.log('TEsst')} text="Filter Option 1" />
-                                <MenuOption onSelect={() => console.log('TEsst')} text="Filter Option 2" />
-                                {/* Weitere Menüoptionen hier hinzufügen */}
-                            </MenuOptions>
-                        </Menu>
-
-
+                        <View style={{flexDirection: "row", width: 100}}>
+                            <SortComponent updateSort={(sortOptions) => navigation.setParams({sortOptions})}></SortComponent>
+                            <Filter
+                                filterParams={filterParams}
+                                updateFilter={(filterParams) => navigation.setParams({ filterParams })} />
+                        </View>
                     )
-                }}
+                })}
             />
-            <Stack.Screen name={"Angebotdetails"} component={Screens.SearchDetailScreen}/>
+            <Stack.Screen name={"Angebotdetails"} component={Screens.DetailsScreen}/>
         </Stack.Navigator>
-        </MenuProvider>
     )
 }
 export default SearchNavigator;

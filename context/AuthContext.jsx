@@ -197,9 +197,17 @@ export const AuthProvider = ({children}) => {
         }
     }
 
-    const getOffers = async (location) => {
+    const getOffers = async (location, filter) => {
         try {
-            return await axios.get(apiUriFactory("offers"), { params: { lat: location.latitude, lon: location.longitude, radius: 1.0 } });
+            return await axios.get(apiUriFactory("offers"), {
+                params: {
+                    lat: location.latitude,
+                    lon: location.longitude,
+                    radius: filter ? filter.searchRadius : 1.0,
+                    cat: filter ? filter.categories.join(',') : '',
+                    typ: filter ? filter.types.join(','): ''
+                }
+            });
         } catch (e) {
             return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
         }
@@ -221,9 +229,14 @@ export const AuthProvider = ({children}) => {
         }
     }
 
-    const getReservationList = async () => {
+    const getReservationList = async (filter) => {
         try {
-            return await axios.get(apiUriFactory("reservations"));
+            return await axios.get(apiUriFactory("reservations"), {
+                params: {
+                    cat: filter ? filter.categories.join(',') : '',
+                    typ: filter ? filter.types.join(','): ''
+                }
+            });
         } catch (e) {
             return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
         }

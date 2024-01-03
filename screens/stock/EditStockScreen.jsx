@@ -135,7 +135,7 @@ const EditStockScreen = ({navigation, route}) => {
                     style={stockStyles.button}
                     onPress={update}
                 >
-                    <Text style={authentificationStyles.buttonText}>Ändderungen speichern</Text>
+                    <Text style={authentificationStyles.buttonText}>Änderungen speichern</Text>
                 </TouchableOpacity>
             </ScrollView>
         </View>

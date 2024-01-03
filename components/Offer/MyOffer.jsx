@@ -72,7 +72,7 @@ const MyOffer = ({offer, navigation}) => {
                         <Text style={offerStyle.text}>Kategorie: {offer.category}</Text>
                         <Text
                             style={offerStyle.text}>Preis: {offer.priceType !== 'TRADE' ? offer.price + " €" : offer.price}</Text>
-                        {(offer.reservationEnd && offer.reservationEnd > 0) ? (
+                        {(offer.reservationEnd && remainingTime > 0) ? (
                             <View style={offerStyle.statusContainer}>
                                 <Ionicons
                                     name="md-alarm"
@@ -114,7 +114,7 @@ const MyOffer = ({offer, navigation}) => {
                     <MenuOption
                         style={offerStyle.menuItem}
                         onSelect={() => handlePopupSelect("delete")}
-                        text={`Angebot ${offer.reservedBy ? "verkaufen" : "löschen"}`}
+                        text={`Angebot ${remainingTime > 0 ? "verkaufen" : "löschen"}`}
                     />
                 </MenuOptions>
             </Menu>
