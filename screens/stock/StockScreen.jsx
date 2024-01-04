@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {authentificationStyles, profileStyles, stockStyles} from "../../assets/styles/commonStyles";
 import {useAuth} from "../../context/AuthContext";
 import LoadingMsg from "../../components/LoadingMsg";
-import Offer from "../../components/Offer/Offer";
+import MyOffer from "../../components/Offer/MyOffer";
 
 const StockScreen = ({navigation}) => {
     const {onGetMyOffers, onLogout} = useAuth();
@@ -44,7 +44,7 @@ const StockScreen = ({navigation}) => {
                         : (
                             <ScrollView>
                                 {offerList.map((item) =>(
-                                    <Offer
+                                    <MyOffer
                                         key={item.offerId}
                                         offer={item}
                                         navigation={navigation}

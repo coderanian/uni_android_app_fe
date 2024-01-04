@@ -54,6 +54,11 @@ export const commonStyles = StyleSheet.create({
         fontSize: 24,
         color: 'gray'
     },
+    emptyIcon: {
+        margin: "auto",
+        fontSize: 96,
+        color: 'gray'
+    },
     dropboxSelection: {
         width: '100%',
         borderWidth: 1,
@@ -66,6 +71,10 @@ export const commonStyles = StyleSheet.create({
     },
     title: {
         paddingBottom: 5
+    },
+    filterList: {
+        paddingHorizontal: 15,
+        paddingTop: 15
     }
 });
 
@@ -198,5 +207,41 @@ export const stockStyles = StyleSheet.create({
         height: 200,
         marginVertical: "5%",
         backgroundColor: 'grey'
+    }
+})
+
+export const searchStyles = StyleSheet.create({
+    button: {
+        width: '100%',
+        padding: 15,
+        borderRadius: 5,
+        marginBottom: "5%",
+        marginTop: "5%",
+        minWidth: "100%",
+        display: "block",
+        backgroundColor: '#016400'
+    },
+    buttoncancel: {
+        width: '100%',
+        padding: 15,
+        borderRadius: 5,
+        marginBottom: "5%",
+        marginTop: "5%",
+        minWidth: "100%",
+        display: "block",
+        backgroundColor: '#ff0000'
+    },
+    buttonText: {
+        color:'#fff',
+        textAlign:'center',
+    },
+    btnDetails: {
+        fontSize: 24
+    },
+    iconContainer: {
+        position: "absolute",
+        top: 0,
+        right: 0,
+        padding: 15,
     }
 })

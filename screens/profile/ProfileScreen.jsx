@@ -3,15 +3,14 @@ import React, {useEffect, useState} from "react";
 import {useAuth} from "../../context/AuthContext";
 import LoadingMsg from "../../components/LoadingMsg";
 import {profileStyles} from "../../assets/styles/commonStyles";
-import MapView, {Marker} from 'react-native-maps';
 import defaultAvatar from "../../assets/images/avatar_template.jpg";
+import MapComponent from "../../components/MapComponent";
 
 const ProfileScreen = ({navigation}) => {
     const {onGetUser, onLogout} = useAuth(); // Access the getUser function and authState from the context
     const [isLoading, setIsLoading] = useState(true);
     const [userData, setUserData] = useState(null);
-    const [offerCnt, setOfferCnt] = useState(null);
-    const [region, setRegion] = useState(null);
+
 
     //Retrieve user properties with token on screen focus / mounting
     useEffect(() => {
@@ -26,8 +25,7 @@ const ProfileScreen = ({navigation}) => {
                         Alert.alert(result.status, result.msg);
                     }
                 } else {
-                    setUserData(result.data.user);
-                    setOfferCnt(result.data.offerCnt);
+                    setUserData(result.data);
                     setIsLoading(false);
                 }
             };
@@ -36,17 +34,6 @@ const ProfileScreen = ({navigation}) => {
         })
         return unsubscribe;
     }, [navigation]);
-
-    useEffect(() => {
-        if(userData && userData.location){
-            setRegion({
-                latitude: userData.location.latitude,
-                longitude: userData.location.longitude,
-                latitudeDelta: 0.005,
-                longitudeDelta: 0.005,
-            }
-        )}
-    }, [userData])
 
     return (
         <View style={profileStyles.container}>
@@ -62,7 +49,7 @@ const ProfileScreen = ({navigation}) => {
                                 </Text>
                                 <Text>Aktive Angebote</Text>
                                 <Text style={profileStyles.propertyValue}>
-                                    {offerCnt}
+                                    {userData.offersCount}
                                 </Text>
                             </View>
                             <Image
@@ -88,17 +75,7 @@ const ProfileScreen = ({navigation}) => {
                                 {!userData.location ? (
                                         <Text style={profileStyles.propertyValue}>Standort nicht gesetzt!</Text>
                                     ) : (
-                                        <MapView
-                                            style={profileStyles.mapContainer}
-                                            region={region}
-                                        >
-                                            <Marker
-                                                coordinate={{
-                                                    latitude: userData.location.latitude,
-                                                    longitude: userData.location.longitude,
-                                                }}
-                                            />
-                                        </MapView>
+                                        <MapComponent location={userData.location}></MapComponent>
                                     )
                                 }
                             </View>

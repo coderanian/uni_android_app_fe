@@ -3,6 +3,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as Screens from "../screens/index"
 import ProfileNavigator from "./ProfileNavigator";
 import StockNavigator from "./StockNavigator";
+import SearchNavigator from "./SearchNavigator";
+import ReserveNavigator from "./ReserveNavigator";
 
 /**
  * Main app navigation via bottom tabs with respective icons
@@ -39,8 +41,8 @@ const MainNavigator = () => {
                 tabBarHideOnKeyboard: true,
             })}
         >
-            <Tab.Screen name={"Suche"} component={Screens.SearchScreen}/>
-            <Tab.Screen name={"Reservierungen"} component={Screens.ReservedScreen}/>
+            <Tab.Screen name={"Suche"} component={SearchNavigator}/>
+            <Tab.Screen name={"Reservierungen"} component={ReserveNavigator}/>
             <Tab.Screen name={"Meine Angebote"} component={StockNavigator}/>
             <Tab.Screen name={"Mein Profil"} component={ProfileNavigator}/>
         </Tab.Navigator>

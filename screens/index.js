@@ -7,3 +7,4 @@ export * from './profile';
 export * from './reserve';
 export * from './search';
 export * from './stock';
+export * from './details';
