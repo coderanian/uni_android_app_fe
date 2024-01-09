@@ -14,7 +14,6 @@ import LogoImage from "../../assets/images/png_busash_logo.png";
  */
 
 const LoginScreen = ({navigation}) => {
-    // const LogoImage = require("/assets/images/png_busash_logo.png");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     //State to toggle message rendering in case pw changed or registration completed
@@ -66,7 +65,6 @@ const LoginScreen = ({navigation}) => {
                     navigation.navigate('Register')
                 }}
             >
-                {/*<Text style={authentificationStyles.buttonLinkText}>Noch nicht registriert?</Text>*/}
                 <Text style={authentificationStyles.buttonLinkText}>Neu bei uns? Jetzt Registrieren!</Text>
             </TouchableOpacity>
         </View>
