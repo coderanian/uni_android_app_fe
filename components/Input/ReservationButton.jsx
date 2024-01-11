@@ -31,10 +31,12 @@ const ReservationButton = ({offer, onCancel}) => {
             if (result.status.toString() === '403') {
                 onLogout();
                 Alert.alert("Login","Login abgelaufen.")
-            }else{
+            } else{
                 Alert.alert(result.status, result.msg);
             }
         } else {
+            offer.reservation.reservationTimestamp = new Date().toISOString();
+            setRemainingTime(offer.reservation.reservationTimestamp);
             onCancel(offer)
         }
     }
@@ -50,7 +52,7 @@ const ReservationButton = ({offer, onCancel}) => {
     }, [offer.reservation]);
 
     return (
-        offer.reservation ? <View>
+        offer.reservation && remainingTime > 0 ? <View>
                 <View style={offerStyle.statusContainer}>
                     <Ionicons
                         name="md-alarm"
