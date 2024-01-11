@@ -6,6 +6,10 @@ import ReservationButton from "../../../components/Input/ReservationButton";
 const OfferInformation = ({route}) => {
     const offer = route.params;
 
+    const handleCancelReservation = () => {
+        console.log('reservation cancelled');
+    }
+
     return (
         <ScrollView style={profileStyles.body}>
             {offer.productPic ? (
@@ -52,7 +56,7 @@ const OfferInformation = ({route}) => {
                 </View>
             </View>
 
-            <ReservationButton offer={offer}></ReservationButton>
+            <ReservationButton offer={offer} onCancel={handleCancelReservation}></ReservationButton>
         </ScrollView>
     )
 };
