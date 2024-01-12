@@ -1,8 +1,8 @@
-import {ScrollView, Text, View, Image, Alert} from "react-native";
+import {ScrollView, Text, View, Image, Alert, TouchableOpacity} from "react-native";
 import React, {useEffect, useState} from "react";
 import {useAuth} from "../../context/AuthContext";
 import LoadingMsg from "../../components/LoadingMsg";
-import {profileStyles} from "../../assets/styles/commonStyles";
+import {authentificationStyles, profileStyles, stockStyles} from "../../assets/styles/commonStyles";
 import defaultAvatar from "../../assets/images/avatar_template.jpg";
 import MapComponent from "../../components/MapComponent";
 
@@ -80,9 +80,20 @@ const ProfileScreen = ({navigation}) => {
                                 }
                             </View>
                         </View>
+                        <View>
+                            <TouchableOpacity
+                                style={stockStyles.button}
+                                onPress={() => {
+                                    onLogout();
+                                    Alert.alert("Login","Du wurdest ausgeloggt.")
+                                }
+                            }
+                            >
+                                <Text style={authentificationStyles.buttonText}>Ausloggen</Text>
+                            </TouchableOpacity>
+                        </View>
                     </ScrollView>
                 )
-
             }
         </View>
     )

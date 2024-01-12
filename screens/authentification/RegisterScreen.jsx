@@ -8,7 +8,6 @@ import {useAuth} from "../../context/AuthContext";
 
 /**
  * Registration screen in the authorization stack
- * @author Konstantin K.
  */
 const RegisterScreen = ({navigation}) => {
     const [username, setUsername] = useState('');
@@ -17,6 +16,7 @@ const RegisterScreen = ({navigation}) => {
     const [isChecked, setChecked] = useState(false);
     const {onLogin, onRegister} = useAuth();
     const register = async () => {
+        console.log(username, email, password, isChecked)
         if (!username || !email || !password || !isChecked) {
             Alert.alert("Fehler", "Bitte überprüfe deine Eingaben!");
         } else {

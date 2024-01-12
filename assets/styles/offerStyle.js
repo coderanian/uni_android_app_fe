@@ -8,6 +8,13 @@ export const offerStyle = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: "grey",
     },
+    authorContainer: {
+        paddingHorizontal: "0%",
+        paddingVertical: "5%",
+        backgroundColor: "white",
+        borderTopWidth: 1,
+        borderTopColor: "grey",
+    },
     innercontainer: {
         flexDirection: "row",
         alignItems: "center",

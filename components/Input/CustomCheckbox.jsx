@@ -7,7 +7,6 @@ import React, {useState} from "react";
  * Custom checkbox section
  * @param text - Text to show to the right of checkbox
  * @returns {Element}
- * @author Konstantin K.
  */
 const CustomCheckbox = ({text}) => {
     const [isChecked, setChecked] = useState(false);

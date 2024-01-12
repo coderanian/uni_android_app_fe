@@ -5,12 +5,13 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import {Menu, MenuOptions, MenuOption, MenuTrigger, MenuProvider} from 'react-native-popup-menu';
 import {useAuth} from "../../context/AuthContext";
 import {calcTime} from "../../utils/calcTime";
+import {offerCategories} from '../../utils/constants'
+import {findOfferTypeKey} from "../../utils/offerTranslation";
 
 /**
  * Element of offer list
  * @param text - Text to show to the right of checkbox
  * @returns {Element}
- * @author Konstantin K.
  */
 const MyOffer = ({offer, navigation}) => {
     const {onDeleteOffer, onLogout} = useAuth();
@@ -69,7 +70,7 @@ const MyOffer = ({offer, navigation}) => {
                     )}
                     <View style={offerStyle.textContainer}>
                         <Text style={offerStyle.title}>{offer.title}</Text>
-                        <Text style={offerStyle.text}>Kategorie: {offer.category}</Text>
+                        <Text style={offerStyle.text}>Kategorie: {findOfferTypeKey(offer.category)}</Text>
                         <Text
                             style={offerStyle.text}>Preis: {offer.priceType !== 'TRADE' ? offer.price + " €" : offer.price}</Text>
                         {(offer.reservationEnd && remainingTime > 0) ? (

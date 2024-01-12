@@ -6,6 +6,7 @@ import {MenuProvider} from 'react-native-popup-menu';
 import {searchStyles} from "../../assets/styles/commonStyles";
 import MapComponent from "../MapComponent";
 import ReservationButton from "../Input/ReservationButton";
+import {findOfferTypeKey} from "../../utils/offerTranslation";
 
 /**
  * Element of offer list
@@ -32,7 +33,7 @@ const Offer = ({offer, navigation, onCancel}) => {
                     )}
                     <View style={offerStyle.textContainer}>
                         <Text style={offerStyle.title}>{offer.title}</Text>
-                        <Text style={offerStyle.text}>Kategorie: {offer.category}</Text>
+                        <Text style={offerStyle.text}>Kategorie: {findOfferTypeKey(offer.category)}</Text>
                         <Text style={offerStyle.text}>Preis: {offer.priceType !== 'TRADE' ? offer.price + " €" : offer.price}</Text>
                         <Text style={offerStyle.text}>Anbieter: {offer.author.name}</Text>
                     </View>

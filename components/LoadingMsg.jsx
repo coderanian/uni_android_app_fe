@@ -2,7 +2,6 @@ import {ActivityIndicator, View, Text} from "react-native";
 
 /**
  * Renders loading bar for authorization, tbc. if needed
- * @author Konstantin K.
  */
 const LoadingMsg = () => {
     return (

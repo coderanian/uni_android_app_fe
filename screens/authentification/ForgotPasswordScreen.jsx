@@ -5,7 +5,6 @@ import {authentificationStyles} from "../../assets/styles/commonStyles";
 /**
  * Password retrieval in the authorization stack
  * tbu. with implementation of POST call
- * @author Konstantin K.
  */
 const ForgotPasswordScreen = ({navigation}) => {
   const [email, setEmail] = useState("");

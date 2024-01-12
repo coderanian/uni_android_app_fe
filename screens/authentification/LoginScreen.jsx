@@ -7,7 +7,6 @@ import {useAuth} from "../../context/AuthContext";
 
 /**
  * Main log-in screen in the authorization stack
- * @author Konstantin K.
  */
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState("");

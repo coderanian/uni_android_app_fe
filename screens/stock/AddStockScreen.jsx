@@ -38,7 +38,6 @@ const AddStockScreen = ({navigation}) => {
     }
     /**
      * Ensure that picture state is updated after fetching location
-     * @author Konstantin K.
      */
     const updatePic = async () => {
         try {

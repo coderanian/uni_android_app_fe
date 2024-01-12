@@ -41,7 +41,6 @@ const EditStockScreen = ({navigation, route}) => {
 
     /**
      * Ensure that picture state is updated after fetching location
-     * @author Konstantin K.
      */
     const updatePic = async () => {
         try {
@@ -74,6 +73,7 @@ const EditStockScreen = ({navigation, route}) => {
                     placeholder={title}
                     onChangeInput={(input) => setTitle(input)}
                     mandatory={true}
+                    edit={true}
                 />
                 <Text style={commonStyles.title}>Kategorie *</Text>
                 <CustomDropdownInput
@@ -86,6 +86,7 @@ const EditStockScreen = ({navigation, route}) => {
                     placeholder={quantity}
                     onChangeInput={(input) => setQuantity(input)}
                     mandatory={true}
+                    edit={true}
                 />
                 <Text style={commonStyles.title}>Art des Angebots *</Text>
                 <CustomDropdownInput
@@ -104,6 +105,7 @@ const EditStockScreen = ({navigation, route}) => {
                         placeholder={price}
                         onChangeInput={(input) => setPrice(input)}
                         mandatory={true}
+                        edit={true}
                     />
                 ) : (
                     <CurrencyInput
@@ -122,7 +124,6 @@ const EditStockScreen = ({navigation, route}) => {
                 )}
                 <Text style={commonStyles.title}>Beschreibung</Text>
                 <TextInput
-                    placeholder={description ?? "Sehr lecker!"}
                     editable
                     multiline
                     numberOfLines={5}
