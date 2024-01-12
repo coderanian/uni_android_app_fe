@@ -1,6 +1,5 @@
 /**
  * Categories of user offers used in stock screens and filters
- * @author Konstantin K.
  */
 export const offerCategories = [
     {label: "Essen", value: "FOOD"},
@@ -16,4 +15,9 @@ export const offerTypes = [
     {label: "Verkauf", value: "SALE"},
     {label: "Tausch", value: "TRADE"},
     {label: "Geschenk", value: "GIFT"},
+]
+
+export const offerStatus = [
+    {label: "Verfügbar", value: "AVAILABLE"},
+    {label: "Reserviert", value: "RESERVED"},
 ]

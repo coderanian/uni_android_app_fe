@@ -10,7 +10,6 @@ import React, {useState} from "react";
  * @param pwConfirmation renders separate input field for validation if true
  * @param placeholder additional different placeholder
  * @returns {Element}
- * @author Konstantin K.
  */
 const PasswordInput = ({onChangeInput, pwConfirmation = false, placeholder= "Passwort"}) => {
     const [password, setPassword] = useState("");

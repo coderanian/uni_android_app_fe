@@ -1,9 +1,9 @@
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import * as Screens from "../screens";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import {commonStyles} from "../assets/styles/commonStyles";
-import {TouchableOpacity, View} from "react-native";
+import {View} from "react-native";
 import * as React from "react";
+import SortComponent from "../components/SortComponent";
+import Filter from "../components/Filter/Filter";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +14,8 @@ const Stack = createNativeStackNavigator();
  * @constructor
  */
 const StockNavigator = ({navigation}) => {
+    let filterParams = {types: [], categories: [], status: []};
+
     return (
         <Stack.Navigator
             initialRouteName={"Übersicht"}
@@ -22,18 +24,20 @@ const StockNavigator = ({navigation}) => {
             <Stack.Screen
                 name={"Übersicht"}
                 component={Screens.StockScreen}
-                options={{
+                initialParams={filterParams}
+                options={({navigation}) => ({
                     headerRight: () => (
-                        <View style={{flexDirection: "row"}}>
-                            <TouchableOpacity onPress={() => (console.log("Kaching!"))}>
-                                <Ionicons name="md-arrow-down" style={commonStyles.standardIcon}/>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => (console.log("Kaching!"))}>
-                                <Ionicons name="md-filter" style={commonStyles.standardIcon}/>
-                            </TouchableOpacity>
+                        <View style={{flexDirection: "row", width: 100}}>
+                            <SortComponent
+                                updateSort={(sortOptions) => navigation.setParams({sortOptions})}
+                            />
+                            <Filter
+                                filterParams={filterParams}
+                                updateFilter={(filterParams) => navigation.setParams({ filterParams })}
+                            />
                         </View>
                     )
-                }}
+                })}
             />
             <Stack.Screen name={"Neues Angebot"} component={Screens.AddStockScreen}/>
             <Stack.Screen name={"Angebot Details"} component={Screens.StockDetailsScreen}/>

@@ -10,7 +10,6 @@ import LogoImage from "../../assets/images/png_busash_logo.png";
 
 /**
  * Main log-in screen in the authorization stack
- * @author Konstantin K.
  */
 
 const LoginScreen = ({navigation}) => {

@@ -3,7 +3,6 @@ import {Alert} from "react-native";
 
 /**
  * Returns coordinates provided by native geolocating services of Android
- * @author Konstantin K.
  * @returns geolocation information
  */
 export async function accessLocation() {

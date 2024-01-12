@@ -1,6 +1,7 @@
 import React from "react";
 import {View, Text, Image, ScrollView, TouchableOpacity} from "react-native";
 import {authentificationStyles, profileStyles, stockStyles} from "../../assets/styles/commonStyles";
+import {findOfferTypeKey} from "../../utils/offerTranslation";
 
 const StockDetailsScreen = ({navigation, route}) => {
     const {offer} = route.params;
@@ -25,7 +26,7 @@ const StockDetailsScreen = ({navigation, route}) => {
                 <View style={profileStyles.detailsContainer}>
                     <Text>Kategorie</Text>
                     <Text style={profileStyles.propertyValue}>
-                        {offer.category}
+                        {findOfferTypeKey(offer.category)}
                     </Text>
                 </View>
                 <View style={profileStyles.detailsContainer}>

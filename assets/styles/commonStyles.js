@@ -2,7 +2,6 @@ import {StyleSheet} from "react-native";
 
 /**
  * Stylesheets for various screens and isolated app components
- * @author Konstantin K.
  */
 export const commonStyles = StyleSheet.create({
     container: {
@@ -179,6 +178,7 @@ export const profileStyles = StyleSheet.create({
     headerContainer: {
         flexDirection: "row",
         paddingVertical: "5%",
+        alignItems: "center",
         flex: 1,
     },
     textContainer: {

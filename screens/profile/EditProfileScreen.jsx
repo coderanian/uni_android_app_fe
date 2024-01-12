@@ -91,7 +91,6 @@ const EditProfileScreen = ({navigation}) => {
 
     /**
      * Ensure that location state is updated after fetching location
-     * @author Konstantin K.
      */
     const updateLoc = async () => {
         try {
@@ -104,7 +103,6 @@ const EditProfileScreen = ({navigation}) => {
 
     /**
      * Ensure that picture state is updated after fetching location
-     * @author Konstantin K.
      */
     const updatePic = async () => {
         try {
@@ -137,12 +135,14 @@ const EditProfileScreen = ({navigation}) => {
                                 placeholder={name}
                                 mailInput={false}
                                 onChangeInput={(input) => setName(input)}
+                                edit={true}
                             />
                             <Text>Email</Text>
                             <CustomTextInput
                                 placeholder={email}
                                 mailInput={true}
                                 onChangeInput={(input) => setEmail(input)}
+                                edit={true}
                             />
                             <Text>Neues Passwort</Text>
                             <PasswordInput

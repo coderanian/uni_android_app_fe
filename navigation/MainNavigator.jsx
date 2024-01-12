@@ -8,7 +8,6 @@ import ReserveNavigator from "./ReserveNavigator";
 
 /**
  * Main app navigation via bottom tabs with respective icons
- * @author Konstantin K.
  */
 const Tab = createBottomTabNavigator();
 
