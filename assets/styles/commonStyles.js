@@ -2,7 +2,6 @@ import {StyleSheet} from "react-native";
 
 /**
  * Stylesheets for various screens and isolated app components
- * @author Konstantin K.
  */
 export const commonStyles = StyleSheet.create({
     container: {
@@ -84,9 +83,28 @@ export const authentificationStyles = StyleSheet.create({
         justifyContent: 'flex-start',
         paddingHorizontal: "10%",
     },
+    imgLogo: {
+        borderColor: "white",
+        borderWidth: 10,
+        borderRadius: 99999,
+        width: 250,
+        height: 250,
+        marginLeft: "auto",
+        marginRight: "auto",
+        marginTop: "20%",
+        marginBottom: "-10%"
+    },
     header: {
-        fontSize: 34,
-        paddingVertical: "20%",
+        fontSize: 30,
+        marginVertical: "20%",
+        color: '#006500',
+        textAlign: 'center',
+        fontWeight: "bold",
+        letterSpacing: 4,
+        textTransform: "uppercase",
+        textShadowRadius: 2,
+        textShadowOffset:{width: 1.5, height: -0.5},
+        textShadowColor: "#80BE1D"
     },
     body: {
         marginBottom: "5%"
@@ -116,7 +134,8 @@ export const authentificationStyles = StyleSheet.create({
     },
     button: {
         width: '100%',
-        backgroundColor: 'grey',
+        // backgroundColor: 'grey',
+        backgroundColor: '#006500',
         padding: 15,
         borderRadius: 5,
         marginBottom: "5%"
@@ -125,13 +144,26 @@ export const authentificationStyles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontSize: 16,
+        fontWeight: "bold",
+        textTransform: "uppercase",
+        letterSpacing: 1,
+        textShadowRadius: 1,
+        textShadowColor: "black"
     },
     buttonLink: {
-        marginTop: "5%",
+        alignItems: "center",
+        marginTop: "5%"
     },
     buttonLinkText: {
-        color: 'black',
+        color: '#006500',
+        fontSize: 16,
+        marginBottom: "2.5%",
+        fontWeight: "bold",
+        alignItems: "center",
         textDecorationLine: 'underline',
+        letterSpacing: 1,
+        textShadowRadius: 1,
+        textShadowColor: "black"
     }
 });
 
@@ -146,6 +178,7 @@ export const profileStyles = StyleSheet.create({
     headerContainer: {
         flexDirection: "row",
         paddingVertical: "5%",
+        alignItems: "center",
         flex: 1,
     },
     textContainer: {

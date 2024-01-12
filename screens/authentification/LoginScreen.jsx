@@ -1,14 +1,17 @@
 import React, { useState} from "react";
-import {View, Text, TouchableOpacity, Alert} from "react-native";
+import {View, Text, Image, TouchableOpacity, Alert} from "react-native";
 import {authentificationStyles} from "../../assets/styles/commonStyles";
 import CustomTextInput from "../../components/Input/CustomTextInput";
 import PasswordInput from "../../components/Input/PasswordInput";
 import {useAuth} from "../../context/AuthContext";
+import LogoImage from "../../assets/images/png_busash_logo.png";
+
+
 
 /**
  * Main log-in screen in the authorization stack
- * @author Konstantin K.
  */
+
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -28,7 +31,11 @@ const LoginScreen = ({navigation}) => {
 
     return (
         <View style={authentificationStyles.container}>
-            <Text style={authentificationStyles.header}>Einloggen</Text>
+            <Image
+                style={authentificationStyles.imgLogo}
+                source={LogoImage}
+            />
+            <Text style={authentificationStyles.header}>Willkommen</Text>
             <CustomTextInput
                 placeholder={"Email"}
                 mailInput={true}
@@ -41,7 +48,7 @@ const LoginScreen = ({navigation}) => {
                 style={authentificationStyles.button}
                 onPress={login}
             >
-                <Text style={authentificationStyles.buttonText}>Einloggen</Text>
+                <Text style={authentificationStyles.buttonText}>Login</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={authentificationStyles.buttonLink}
@@ -57,7 +64,7 @@ const LoginScreen = ({navigation}) => {
                     navigation.navigate('Register')
                 }}
             >
-                <Text style={authentificationStyles.buttonLinkText}>Noch nicht regestriert?</Text>
+                <Text style={authentificationStyles.buttonLinkText}>Neu bei uns? Jetzt Registrieren!</Text>
             </TouchableOpacity>
         </View>
     )

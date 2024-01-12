@@ -4,7 +4,6 @@ import {commonStyles} from "../assets/styles/commonStyles";
 
 /**
  * Displays error text based on the input state
- * @author Konstantin K.
  * @param msg - string to show as error, if none Pflichtfeld! is used
  */
 const ErrorMsg = ({msg = "Pflichtfeld!"}) => {

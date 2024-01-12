@@ -13,6 +13,7 @@ const SearchScreen = () => {
     const {onGetOffers, onLogout} = useAuth();
     const [offerList, setOfferList] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [location, setLocation] = useState(null);
 
     const navigation = useNavigation();
     const route = useRoute();
@@ -49,8 +50,12 @@ const SearchScreen = () => {
         if (result && result.error) {
             if (['403', '500'].includes(result.status.toString())) {
                 onLogout();
-                Alert.alert(result)
-            } else {
+                Alert.alert(result);
+            } else if (result.status.toString() === '406') {
+                setOfferList([]);
+                setIsLoading(false);
+            }
+            else {
                 Alert.alert(result.status, result.msg);
             }
         } else {

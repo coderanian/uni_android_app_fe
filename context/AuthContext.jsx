@@ -9,7 +9,6 @@ const AuthContext = createContext(null);
 
 /**
  * Make storage available
- * @author Konstantin K.
  */
 export const useAuth = () => {
     return useContext(AuthContext);
@@ -17,7 +16,6 @@ export const useAuth = () => {
 
 /**
  * Wraps app and provides context data and functions related to authentication
- * @author Konstantin K.
  */
 export const AuthProvider = ({children}) => {
     const [authState, setAuthState] = useState({
@@ -29,7 +27,6 @@ export const AuthProvider = ({children}) => {
 
     /**
      * Retrieve token on app launch by defining authorization header
-     * @author Konstantin K.
      */
     useEffect(() => {
         const loadToken = async () => {
@@ -52,7 +49,6 @@ export const AuthProvider = ({children}) => {
      * @param name input
      * @param password input
      * @returns server response
-     * @author Konstantin K.
      */
     const register = async (email, name, password) => {
         try {
@@ -61,6 +57,7 @@ export const AuthProvider = ({children}) => {
                 {email, name, password}
             );
         } catch (e) {
+            console.log(e)
             return {error: true, status: e.response.status.toString(), msg: e.response.data};
         }
     };
@@ -68,7 +65,6 @@ export const AuthProvider = ({children}) => {
     /**
      * Fetch profile data of user id
      * @returns server response
-     * @author Konstantin K.
      */
     const getUser = async () => {
         try {
@@ -81,7 +77,6 @@ export const AuthProvider = ({children}) => {
     /**
      * Update profile data of user id
      * @returns server response
-     * @author Konstantin K.
      */
     const putUser = async (name, email, newPassword, picture, location) => {
         try {
@@ -99,7 +94,6 @@ export const AuthProvider = ({children}) => {
      * @param email input
      * @param password input
      * @returns server response
-     * @author Konstantin K.
      */
     const login = async (email, password) => {
         try {
@@ -119,7 +113,6 @@ export const AuthProvider = ({children}) => {
     /**
      * Deletes token from storage, resets auth. state forcing login screen to render
      * @returns {Promise<void>}
-     * @author Konstantin K.
      */
     const logout = async () => {
         await SecureStore.deleteItemAsync(TOKEN_KEY);
@@ -133,7 +126,6 @@ export const AuthProvider = ({children}) => {
     /**
      * Sends post request with offer details for new offer
      * @returns {Promise<void>}
-     * @author Konstantin K.
      */
     const postOffer = async (
         title, description, category, quantity, priceType, price, productPic
@@ -153,7 +145,6 @@ export const AuthProvider = ({children}) => {
     /**
      * Sends put request with offer details for new offer
      * @returns {Promise<void>}
-     * @author Konstantin K.
      */
     const putOffer = async (
         offerId, title, description, category, quantity, priceType, price, productPic
@@ -171,7 +162,6 @@ export const AuthProvider = ({children}) => {
     /**
      * Sends delete request with for existing offer
      * @returns {Promise<void>}
-     * @author Konstantin K.
      */
     const deleteOffer = async (offerId, sold) => {
         try {
@@ -187,11 +177,16 @@ export const AuthProvider = ({children}) => {
     /**
      * Retrieves array of offers created by the user
      * @returns {Promise<void>}
-     * @author Konstantin K.
      */
-    const getMyOffers = async() => {
+    const getMyOffers = async(filter) => {
         try {
-            return await axios.get(apiUriFactory("offers/my-offers"));
+            return await axios.get(apiUriFactory("offers/my-offers"),{
+                params: {
+                    cat: filter ? filter.categories.join(',') : '',
+                    typ: filter ? filter.types.join(','): '',
+                    status: filter ? filter.status.join(','): '',
+                }
+            });
         } catch (e) {
             return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
         }
@@ -208,6 +203,14 @@ export const AuthProvider = ({children}) => {
                     typ: filter ? filter.types.join(','): ''
                 }
             });
+        } catch (e) {
+            return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
+        }
+    }
+
+    const getUserOffers = async (userId) => {
+        try {
+            return await axios.get(apiUriFactory(`offers/users/${userId}`));
         } catch (e) {
             return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
         }
@@ -257,6 +260,7 @@ export const AuthProvider = ({children}) => {
         onDeleteOffer: deleteOffer,
         onGetOffers: getOffers,
         onReserveOffer: reserveOffer,
+        onGetUserOffers: getUserOffers,
         onCancelReservation: cancelReservation,
         onGetReservationList: getReservationList,
         authState,

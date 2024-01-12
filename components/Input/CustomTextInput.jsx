@@ -10,8 +10,8 @@ import React, {useState} from "react";
  * @param mailInput Activate email validation via regex match
  * @param mandatory Render error message beneath if input is empty
  * @param errMsg Error message to render beneath if input is empty
+ * @param edit Prefill input box instead of using placeholder
  * @returns {Element}
- * @author Konstantin K.
  */
 const CustomTextInput = ({
         placeholder,
@@ -19,8 +19,9 @@ const CustomTextInput = ({
         mailInput= false,
         mandatory=false,
         errMsg='Pflichtfeld',
+        edit = false
     }) => {
-    const [inputVal, setInputVal] = useState("");
+    const [inputVal, setInputVal] = useState(edit ? placeholder : "");
     const [err, setErr] = useState(false);
 
     const validateInput = () => {
@@ -34,23 +35,28 @@ const CustomTextInput = ({
 
     return (
         <View>
-            <TextInput
-                style={authentificationStyles.inputRegular}
-                placeholder={placeholder}
-                autoCapitalize={"none"}
-                inputMode={mailInput ? 'email' : 'text'}
-                value={inputVal}
-                onChangeText={(input) => setInputVal(input)}
-                onFocus={() => setErr(false)}
-                onEndEditing={() => {
-                    setErr(validateInput)
-                }}
-            />
+
+                <TextInput
+                    style={authentificationStyles.inputRegular}
+                    autoCapitalize="none"
+                    placeholder={placeholder}
+                    inputMode={mailInput ? 'email' : 'text'}
+                    value={inputVal}
+                    onChangeText={(input) => setInputVal(input)}
+                    onFocus={() => setErr(false)}
+                    onEndEditing={() => {
+                        setErr(validateInput);
+                    }}
+                    onBlur={() => {
+                        setErr(validateInput);
+                    }}
+                />
+
             {mandatory && err && (
                 <ErrorMsg msg={errMsg}/>
             )}
         </View>
-    )
+    );
 }
 
 export default CustomTextInput;

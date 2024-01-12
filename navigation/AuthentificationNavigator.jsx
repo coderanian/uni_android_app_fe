@@ -4,7 +4,6 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
 /**
  * Authorization navigation via screens stack
- * @author Konstantin K.
  */
 const AuthentificationNavigator = () => {
     return (

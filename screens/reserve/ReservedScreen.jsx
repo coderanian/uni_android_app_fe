@@ -64,7 +64,7 @@ const ReservedScreen = () => {
             {isLoading
                 ? <LoadingMsg/>
                 : (offerList && offerList.length === 0
-                        ? (<EmptyState message={"Noch kein Reservierung vorhanden"}></EmptyState>)
+                        ? (<EmptyState message={"Noch keine Reservierung vorhanden"}></EmptyState>)
                         : (
                             <ScrollView>
                                 {offerList.map((item) =>(

@@ -15,8 +15,7 @@ const SearchDetailScreen = ({navigation, route}) => {
     return (
         /*<ScrollView style={profileStyles.body}>*/
             <Tab.Navigator>
-                <Tab.Screen name="Anbieter" component={AuthorInformation} initialParams={{author: offer.author}}>
-                </Tab.Screen>
+                <Tab.Screen name="Anbieter" component={AuthorInformation} initialParams={{author: offer.author}}></Tab.Screen>
             </Tab.Navigator>
 
 

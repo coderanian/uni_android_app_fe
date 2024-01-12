@@ -1,45 +1,63 @@
 import React, {useEffect, useState} from "react";
 import { IconButton, Menu, List } from 'react-native-paper';
 import Slider from "@react-native-community/slider";
-import {offerCategories, offerTypes} from "../../utils/constants";
+import {offerCategories, offerTypes, offerStatus} from "../../utils/constants";
 import CheckboxFilter from "./CheckboxFilter";
+import {useIsFocused, useNavigation} from "@react-navigation/native";
 
 const Filter = ({filterParams, updateFilter}) => {
-    const [isMenuVisible, setMenuVisible] = React.useState(false);
+    const navigation = useNavigation();
 
     const searchRadiusVisible = Object.hasOwn(filterParams, 'searchRadius');
+    const statusVisible = Object.hasOwn(filterParams, "status");
 
+    const [isMenuVisible, setMenuVisible] = React.useState(false);
     const [searchRadius, setSearchRadius] = useState(searchRadiusVisible ? filterParams.searchRadius : null);
     const [selectedTypes, setSelectedTypes] = useState(filterParams.types);
     const [selectedCategories, setSelectedCategories] = useState(filterParams.categories);
+    const [selectedStatus, setSelectedStatus] = useState(statusVisible ? filterParams.status : null);
 
     const openMenu = () => setMenuVisible(true);
     const closeMenu = () => setMenuVisible(false);
-
-
 
     useEffect(() => {
         updateFilter({
             searchRadius: searchRadius,
             types: selectedTypes,
-            categories: selectedCategories
+            categories: selectedCategories,
+            status: selectedStatus
         });
 
-    }, [searchRadius, selectedTypes, selectedCategories]);
+    }, [searchRadius, selectedTypes, selectedCategories, selectedStatus]);
 
+    /**
+     * Resets filter selection to empty to ensure that both request and UI filter are empty on re-mount of the screen
+     */
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            setSearchRadius(searchRadiusVisible ? 1 : null);
+            setSelectedTypes([]);
+            setSelectedCategories([]);
+            setSelectedStatus(statusVisible ? [] : null);
+        })
+        return unsubscribe;
+    }, [navigation]);
 
-    const getCatDescription = () => {
+    const getDescription = (list) => {
         const labels = [];
-        selectedCategories.map(cat => {
-            labels.push(offerCategories.find(e => e.value === cat).label)
-        });
-        return labels.join(', ');
-    }
-    const getTypeDescription = () => {
-        const labels = [];
-        selectedTypes.map(type => {
-            labels.push(offerTypes.find(e => e.value === type).label)
-        });
+        if(list === "cat"){
+            selectedCategories.map(cat => {
+                labels.push(offerCategories.find(e => e.value === cat).label)
+            });
+        }else if(list === "type"){
+            selectedTypes.map(type => {
+                labels.push(offerTypes.find(e => e.value === type).label)
+            });
+        }else{
+            selectedStatus.map(type => {
+                labels.push(offerStatus.find(e => e.value === type).label)
+            });
+        }
         return labels.join(', ');
     }
 
@@ -75,7 +93,7 @@ const Filter = ({filterParams, updateFilter}) => {
                     }
                     <List.Accordion id="id2"
                                 title="Angebotstyp"
-                                description={getTypeDescription()} style={{width: 250}}>
+                                description={getDescription("type")} style={{width: 250}}>
                         <CheckboxFilter
                             key="typeFilter"
                             checkboxList={offerTypes}
@@ -85,7 +103,7 @@ const Filter = ({filterParams, updateFilter}) => {
                     </List.Accordion>
                     <List.Accordion id="id3"
                                 title="Kategorie"
-                                description={getCatDescription()} >
+                                description={getDescription("cat")} >
                         <CheckboxFilter
                             key="catFilter"
                             checkboxList={offerCategories}
@@ -93,6 +111,18 @@ const Filter = ({filterParams, updateFilter}) => {
                             initialState={selectedCategories}
                         ></CheckboxFilter>
                     </List.Accordion>
+                    {statusVisible &&
+                        <List.Accordion id="id4"
+                                        title="Status"
+                                        description={getDescription("status")} >
+                            <CheckboxFilter
+                                key="statusFilter"
+                                checkboxList={offerStatus}
+                                updateCheckboxList={(val) => setSelectedStatus(val)}
+                                initialState={selectedStatus}
+                            ></CheckboxFilter>
+                        </List.Accordion>
+                    }
                 </List.AccordionGroup>
             </Menu>
     )

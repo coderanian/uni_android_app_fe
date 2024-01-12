@@ -9,7 +9,6 @@ import {View} from "react-native";
  * @param onChangeInput parent component function to update its state
  * @param defaultSelection pass if you want to edit existing dropdown selection
  * @returns {Element}
- * @author Konstantin K.
  */
 const CustomDropdownInput = ({list, onChangeInput, defaultSelection = null}) => {
     const [selection, setSelection] = useState(defaultSelection);
