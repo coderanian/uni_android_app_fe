@@ -10,7 +10,7 @@ const OfferInformation = ({route}) => {
     useEffect(() => {
         setOffer(route.params.offer ?? route.params)
     }, [route]);
-
+    //console.log(route.params.productPic)
     return (
         <ScrollView style={profileStyles.body}>
             {offer.productPic ? (

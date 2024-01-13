@@ -15,6 +15,7 @@ export function apiUriFactory(endpoint) {
         : "https://www.realapi.com"; //placeholder domain
     return api + "/api/" + endpoint;
      */
+    //Current live uri for api
     let api = "https://busash.matthiaskorf.de/api/"
     return api + endpoint;
 }
