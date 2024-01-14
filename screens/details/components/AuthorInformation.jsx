@@ -7,7 +7,6 @@ import {useIsFocused, useNavigation} from "@react-navigation/native";
 import LoadingMsg from "../../../components/LoadingMsg";
 import {offerStyle} from "../../../assets/styles/offerStyle";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import {MenuProvider} from "react-native-popup-menu";
 import {findOfferTypeKey} from "../../../utils/offerTranslation";
 
 const AuthorInformation = ({route}) => {
@@ -64,9 +63,10 @@ const AuthorInformation = ({route}) => {
             {isLoading
                 ? <LoadingMsg/>
                 : (offerList.map((offer) =>(
-                    <MenuProvider skipInstanceCheck key={offer.id}>
-                        <View style={offerStyle.authorContainer} key={offer.id}>
-                            <View style={offerStyle.innercontainer} key={offer.id}>
+
+                    <View key={offer.offerId}>
+                        <View style={offerStyle.authorContainer}>
+                            <View style={offerStyle.innercontainer}>
                                 {offer.productPic ? (
                                     <Image style={offerStyle.img} source={{uri: offer.productPic}}/>
                                 ) : (
@@ -86,7 +86,7 @@ const AuthorInformation = ({route}) => {
                                 onPress={() => navigation.navigate("Details", {offer: offer})}
                             />
                         </View>
-                    </MenuProvider>
+                    </View>
                 )))
             }
         </ScrollView>

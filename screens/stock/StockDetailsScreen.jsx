@@ -2,6 +2,7 @@ import React from "react";
 import {View, Text, Image, ScrollView, TouchableOpacity} from "react-native";
 import {authentificationStyles, profileStyles, stockStyles} from "../../assets/styles/commonStyles";
 import {findOfferTypeKey} from "../../utils/offerTranslation";
+import {offerTypes} from "../../utils/constants";
 
 const StockDetailsScreen = ({navigation, route}) => {
     const {offer} = route.params;
@@ -36,15 +37,9 @@ const StockDetailsScreen = ({navigation, route}) => {
                     </Text>
                 </View>
                 <View style={profileStyles.detailsContainer}>
-                    <Text>Quantität</Text>
-                    <Text style={profileStyles.propertyValue}>
-                        {offer.quantity}
-                    </Text>
-                </View>
-                <View style={profileStyles.detailsContainer}>
                     <Text>Art des Angebots</Text>
                     <Text style={profileStyles.propertyValue}>
-                        {offer.priceType}
+                        {offerTypes.find(e => e.value === offer.priceType).label}
                     </Text>
                 </View>
                 <View style={profileStyles.detailsContainer}>
@@ -54,7 +49,7 @@ const StockDetailsScreen = ({navigation, route}) => {
                     </Text>
                 </View>
                 <View style={profileStyles.detailsContainer}>
-                    <Text>Preis</Text>
+                    <Text>Beschreibung</Text>
                     <Text style={profileStyles.propertyValue}>
                         {offer.description}
                     </Text>
