@@ -1,7 +1,6 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { AuthorInformation, OfferInformation, LocationInformation } from "./components";
-import {useNavigation} from "@react-navigation/native";
 
 const Tab = createMaterialTopTabNavigator();
 const DetailsScreen = ({route}) => {

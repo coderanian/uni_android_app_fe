@@ -5,9 +5,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import {useAuth} from "../../context/AuthContext";
 import {calcTime} from "../../utils/calcTime";
-import {offerCategories} from '../../utils/constants'
 import {findOfferTypeKey} from "../../utils/offerTranslation";
-import {IconButton, Menu} from "react-native-paper";
+import {Menu} from "react-native-paper";
 
 /**
  * Element of offer list
@@ -123,32 +122,6 @@ const MyOffer = ({offer, navigation}) => {
                 </View>
 
             </View>
-
-            {/*<Menu style={offerStyle.btn}>
-                <MenuTrigger>
-                    <Ionicons
-                        name="md-ellipsis-vertical"
-                        style={offerStyle.btnIcon}
-                    />
-                </MenuTrigger>
-                <MenuOptions style={offerStyle.menu}>
-                    <MenuOption
-                        style={offerStyle.menuItem}
-                        onSelect={() => handlePopupSelect("details")}
-                        text={"Angebot ansehen"}
-                    />
-                    <MenuOption
-                        style={offerStyle.menuItem}
-                        onSelect={() => handlePopupSelect("edit")}
-                        text={"Angebot bearbeiten"}
-                    />
-                    <MenuOption
-                        style={offerStyle.menuItem}
-                        onSelect={() => handlePopupSelect("delete")}
-                        text={`Angebot ${remainingTime > 0 ? "verkaufen" : "löschen"}`}
-                    />
-                </MenuOptions>
-            </Menu>*/}
         </View>
     )
 }
