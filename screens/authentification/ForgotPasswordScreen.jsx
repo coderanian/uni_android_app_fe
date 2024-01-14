@@ -19,6 +19,12 @@ const ForgotPasswordScreen = ({navigation}) => {
       Alert.alert("Fehler", "Bitte überprüfe deine Eingaben!");
     }
   }
+
+    const cancel = () => {
+        navigation.navigate({
+            name: "Log-In"
+        })
+    }
   return (
     <View style={authentificationStyles.container}>
       <Text style={authentificationStyles.header}>Passwort vergessen</Text>
@@ -36,6 +42,12 @@ const ForgotPasswordScreen = ({navigation}) => {
       >
         <Text style={authentificationStyles.buttonText}>Passwort wiederherstellen</Text>
       </TouchableOpacity>
+        <TouchableOpacity
+            style={authentificationStyles.buttonSecondary}
+            onPress={cancel}
+        >
+            <Text style={authentificationStyles.buttonText}>Abbrechen</Text>
+        </TouchableOpacity>
     </View>
   )
 }
