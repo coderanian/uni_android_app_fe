@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {ScrollView, Text, View, Image} from "react-native";
 import {profileStyles, stockStyles} from "../../../assets/styles/commonStyles";
 import ReservationButton from "../../../components/Input/ReservationButton";
-import {useFocusEffect, useNavigation} from "@react-navigation/native";
 import {findOfferTypeKey} from "../../../utils/offerTranslation";
 
 const OfferInformation = ({route}) => {
@@ -10,7 +9,6 @@ const OfferInformation = ({route}) => {
     useEffect(() => {
         setOffer(route.params.offer ?? route.params)
     }, [route]);
-    //console.log(route.params.productPic)
     return (
         <ScrollView style={profileStyles.body}>
             {offer.productPic ? (

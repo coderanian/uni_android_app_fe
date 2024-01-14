@@ -2,17 +2,12 @@ import React, {useEffect, useState} from "react";
 import {View, Text, Image, ScrollView, Alert} from "react-native";
 import {profileStyles, searchStyles} from "../../../assets/styles/commonStyles";
 import defaultAvatar from "../../../assets/images/avatar_template.jpg";
-import {accessLocation} from "../../../services/accessLocation";
 import {useAuth} from "../../../context/AuthContext";
 import {useIsFocused, useNavigation} from "@react-navigation/native";
 import LoadingMsg from "../../../components/LoadingMsg";
-import EmptyState from "../../../components/EmptyState";
-import Offer from "../../../components/Offer/Offer";
 import {offerStyle} from "../../../assets/styles/offerStyle";
-import ReservationButton from "../../../components/Input/ReservationButton";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {MenuProvider} from "react-native-popup-menu";
-import {OfferInformation} from "./index";
 import {findOfferTypeKey} from "../../../utils/offerTranslation";
 
 const AuthorInformation = ({route}) => {
