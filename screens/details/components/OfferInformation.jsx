@@ -9,6 +9,11 @@ const OfferInformation = ({route}) => {
     useEffect(() => {
         setOffer(route.params.offer ?? route.params)
     }, [route]);
+
+    const handleCancelReservation = () => {
+        console.log('reservation cancelled');
+    }
+
     return (
         <ScrollView style={profileStyles.body}>
             {offer.productPic ? (
@@ -55,7 +60,7 @@ const OfferInformation = ({route}) => {
                 </View>
             </View>
 
-            <ReservationButton offer={offer}></ReservationButton>
+            <ReservationButton offer={offer} onCancel={handleCancelReservation}></ReservationButton>
         </ScrollView>
     )
 };
