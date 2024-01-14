@@ -32,7 +32,7 @@ const AddStockScreen = ({navigation}) => {
                 }
             } else {
                 navigation.goBack();
-                Alert.alert("Neues Angebot", "Angebot erfolgreich erstell!")
+                Alert.alert("Neues Angebot", "Angebot erfolgreich erstellt!")
             }
         }
     }
