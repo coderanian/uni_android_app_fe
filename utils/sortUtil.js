@@ -11,6 +11,32 @@ export function sortByAttribute(arr, attribute, sortOrder = 'asc') {
 
     const isAscending = sortOrder.toLowerCase() === 'asc';
 
+    /**
+     * Sonderlösung für Sortierung nach Preis, da erst nach Preistype und danach nach Preis sortiert werden muss
+     */
+    if (attribute === 'price') {
+        return arr.slice().sort((a, b) => {
+            let comparison = 0;
+
+            if (a.priceType < b.priceType) {
+                comparison = -1
+            } else if (a.priceType > b.priceType) {
+                comparison = 1;
+            }
+            comparison = isAscending ? comparison : -comparison;
+
+            if (comparison === 0) {
+                if (a.price < b.price) {
+                    comparison = -1;
+                } else if (a.price > b.price) {
+                    comparison = 1
+                }
+                comparison = isAscending ? comparison : -comparison;
+            }
+            return comparison;
+        });
+    }
+
     return arr.slice().sort((a, b) => {
         const valueA = a[attribute];
         const valueB = b[attribute];
