@@ -2,11 +2,12 @@ import {View, Text, Image, Alert} from "react-native";
 import React, {useEffect, useState} from "react";
 import {offerStyle} from "../../assets/styles/offerStyle";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import {Menu, MenuOptions, MenuOption, MenuTrigger, MenuProvider} from 'react-native-popup-menu';
+
 import {useAuth} from "../../context/AuthContext";
 import {calcTime} from "../../utils/calcTime";
 import {offerCategories} from '../../utils/constants'
 import {findOfferTypeKey} from "../../utils/offerTranslation";
+import {IconButton, Menu} from "react-native-paper";
 
 /**
  * Element of offer list
@@ -15,7 +16,10 @@ import {findOfferTypeKey} from "../../utils/offerTranslation";
  */
 const MyOffer = ({offer, navigation}) => {
     const {onDeleteOffer, onLogout} = useAuth();
+    const [visible, setVisible] = useState(false);
     const [remainingTime, setRemainingTime] = useState(calcTime(offer.reservationEnd));
+    const openMenu = () => setVisible(true);
+    const closeMenu = () => setVisible(false);
 
     const deleteOffer = async () => {
         let sold = !!offer.reservedBy;
@@ -34,6 +38,7 @@ const MyOffer = ({offer, navigation}) => {
     }
 
     const handlePopupSelect = (val) => {
+        setVisible(false);
         switch (val) {
             case 'details':
                 navigation.navigate("Angebot Details", {offer});
@@ -60,7 +65,7 @@ const MyOffer = ({offer, navigation}) => {
     }, [offer.reservationEnd]);
 
     return (
-        <MenuProvider skipInstanceCheck>
+        <View>
             <View style={offerStyle.container}>
                 <View style={offerStyle.innercontainer}>
                     {offer.productPic ? (
@@ -92,9 +97,34 @@ const MyOffer = ({offer, navigation}) => {
                         )}
                     </View>
 
+                    <Menu
+                        visible={visible}
+                        onDismiss={closeMenu}
+                        style={offerStyle.btn}
+                        anchorPosition={"bottom"}
+                        anchor={
+                            <Ionicons
+                                name="md-ellipsis-vertical"
+                                style={offerStyle.btnIcon}
+                                onPress={openMenu}
+                            />
+                        }>
+                        <Menu.Item
+                            onPress={() => handlePopupSelect("details")}
+                            title={"Angebot ansehen"}/>
+                        <Menu.Item
+                            onPress={() => handlePopupSelect("edit")}
+                            title={"Angebot bearbeiten"}/>
+                        <Menu.Item
+                            onPress={() => handlePopupSelect("delete")}
+                            title={`Angebot ${remainingTime > 0 ? "verkaufen" : "löschen"}`}/>
+                    </Menu>
+
                 </View>
+
             </View>
-            <Menu style={offerStyle.btn}>
+
+            {/*<Menu style={offerStyle.btn}>
                 <MenuTrigger>
                     <Ionicons
                         name="md-ellipsis-vertical"
@@ -118,8 +148,8 @@ const MyOffer = ({offer, navigation}) => {
                         text={`Angebot ${remainingTime > 0 ? "verkaufen" : "löschen"}`}
                     />
                 </MenuOptions>
-            </Menu>
-        </MenuProvider>
+            </Menu>*/}
+        </View>
     )
 }
 

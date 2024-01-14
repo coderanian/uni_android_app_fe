@@ -3,6 +3,7 @@ import {ScrollView, Text, View, Image} from "react-native";
 import {profileStyles, stockStyles} from "../../../assets/styles/commonStyles";
 import ReservationButton from "../../../components/Input/ReservationButton";
 import {findOfferTypeKey} from "../../../utils/offerTranslation";
+import {offerTypes} from "../../../utils/constants";
 
 const OfferInformation = ({route}) => {
     const [offer, setOffer] = useState(route.params.offer ?? route.params);
@@ -43,11 +44,11 @@ const OfferInformation = ({route}) => {
                 <View style={profileStyles.detailsContainer}>
                     <Text>Art des Angebots</Text>
                     <Text style={profileStyles.propertyValue}>
-                        {offer.priceType}
+                        {offerTypes.find(e => e.value === offer.priceType).label}
                     </Text>
                 </View>
                 <View style={profileStyles.detailsContainer}>
-                    <Text>Preis</Text>
+                    <Text>{offer.priceType === "TRADE" ? "Tauschwert" : "Preis"}</Text>
                     <Text style={profileStyles.propertyValue}>
                         {offer.priceType === "TRADE" ? offer.price : offer.price + " €"}
                     </Text>
