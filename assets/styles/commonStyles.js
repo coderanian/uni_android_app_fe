@@ -192,8 +192,7 @@ export const profileStyles = StyleSheet.create({
     },
     propertyValue: {
         fontWeight: "bold",
-        fontSize: 18,
-        textTransform: "capitalize"
+        fontSize: 18
     },
     imgContainer: {
         flex: 1,
