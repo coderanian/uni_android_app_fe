@@ -26,9 +26,13 @@ export function sortByAttribute(arr, attribute, sortOrder = 'asc') {
             comparison = isAscending ? comparison : -comparison;
 
             if (comparison === 0) {
-                if (a.price < b.price) {
+                // Konvertiere die Strings in Zahlen, falls sie Zahlen sind
+                const numberA = isNaN(a.price) ? 0 : parseFloat(a.price);
+                const numberB = isNaN(b.price) ? 0 : parseFloat(b.price);
+
+                if (numberA < numberB) {
                     comparison = -1;
-                } else if (a.price > b.price) {
+                } else if (numberA > numberB) {
                     comparison = 1
                 }
                 comparison = isAscending ? comparison : -comparison;
