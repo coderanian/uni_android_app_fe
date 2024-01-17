@@ -37,11 +37,23 @@ This wrapper package was bootstrapped with:
 
 
 ## Installation
-1. Application is using Expo for its build and testing, so you have to install Expo CLI
-2. Run npm i to install all the dependencies.
-3. Once installed run npx expo to start the application, you may need to do it via default CMD if your IDE portray's QR-code wrong (cd to directory and run npx start)
-4. Install Expo app on your smartphone and scan the QR code
-5. Now you can run app on your smartphone directly, no need to scan QR code each time as it should be saved in your app. Simply npx expo each time you work on the project
+a). For APK:
+1. tbd.
+   
+b). For local app emulation via Expo Go app:
+1. You require IDE which can install packages via npm.
+2. Application is using Expo for its build and testing, so you have to install Expo CLI.
+3. Run npm i to install all the dependencies.
+4. Once installed run npx expo to start the application, you may need to do it via default CMD if your IDE portray's QR-code wrong (cd to directory and run npx start).
+5. Install Expo app on your smartphone and scan the QR code.
+6. Now you can run app on your smartphone directly, no need to scan QR code each time as it should be saved in your app. Simply npx expo each time you work on the project.
+
+c). For local app emulation via Expo Go app:
+1. You require IDE which can install packages via npm and installed and configured Android emulator.
+2. Application is using Expo for its build and testing, so you have to install Expo CLI.
+3. Run npm i to install all the dependencies.
+4. Once installed run npx expo start to start the application.
+5. Now you can run app on your local Android emulator directly.
 
 ## Package Usage
 1. Expo: 
