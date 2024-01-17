@@ -19,7 +19,7 @@ const StockDetailsScreen = ({navigation, route}) => {
             )}
             <View>
                 <View style={profileStyles.detailsContainer}>
-                    <Text>Title</Text>
+                    <Text>Titel</Text>
                     <Text style={profileStyles.propertyValue}>
                         {offer.title}
                     </Text>
