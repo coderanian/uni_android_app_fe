@@ -23,12 +23,12 @@ export const offerStyle = StyleSheet.create({
     img: {
         width: 90,
         height: 90,
-        marginRight: "10%",
+        marginRight: "5%",
     },
     imgTemplate: {
         width: 90,
         height: 90,
-        marginRight: "10%",
+        marginRight: "5%",
         backgroundColor: "grey"
     },
     textContainer: {
@@ -40,6 +40,7 @@ export const offerStyle = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
         marginBottom: 5,
+        marginRight: "10%",
     },
     text: {
         fontSize: 14,
