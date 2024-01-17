@@ -2,15 +2,19 @@ import React, {useEffect, useState} from "react";
 import {ScrollView, Text, View, Image} from "react-native";
 import {profileStyles, stockStyles} from "../../../assets/styles/commonStyles";
 import ReservationButton from "../../../components/Input/ReservationButton";
-import {useFocusEffect, useNavigation} from "@react-navigation/native";
 import {findOfferTypeKey} from "../../../utils/offerTranslation";
+import {offerTypes} from "../../../utils/constants";
 
 const OfferInformation = ({route}) => {
     const [offer, setOffer] = useState(route.params.offer ?? route.params);
     useEffect(() => {
         setOffer(route.params.offer ?? route.params)
     }, [route]);
-    //console.log(route.params.productPic)
+
+    const handleCancelReservation = () => {
+        console.log('reservation cancelled');
+    }
+
     return (
         <ScrollView style={profileStyles.body}>
             {offer.productPic ? (
@@ -20,7 +24,7 @@ const OfferInformation = ({route}) => {
             )}
             <View>
                 <View style={profileStyles.detailsContainer}>
-                    <Text>Title</Text>
+                    <Text>Titel</Text>
                     <Text style={profileStyles.propertyValue}>
                         {offer.title}
                     </Text>
@@ -40,11 +44,11 @@ const OfferInformation = ({route}) => {
                 <View style={profileStyles.detailsContainer}>
                     <Text>Art des Angebots</Text>
                     <Text style={profileStyles.propertyValue}>
-                        {offer.priceType}
+                        {offerTypes.find(e => e.value === offer.priceType).label}
                     </Text>
                 </View>
                 <View style={profileStyles.detailsContainer}>
-                    <Text>Preis</Text>
+                    <Text>{offer.priceType === "TRADE" ? "Tauschwert" : "Preis"}</Text>
                     <Text style={profileStyles.propertyValue}>
                         {offer.priceType === "TRADE" ? offer.price : offer.price + " €"}
                     </Text>
@@ -57,7 +61,7 @@ const OfferInformation = ({route}) => {
                 </View>
             </View>
 
-            <ReservationButton offer={offer}></ReservationButton>
+            <ReservationButton offer={offer} onCancel={handleCancelReservation}></ReservationButton>
         </ScrollView>
     )
 };

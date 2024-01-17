@@ -1,5 +1,5 @@
 import {Alert, ScrollView, Text, View} from "react-native";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useAuth} from "../../context/AuthContext";
 import {profileStyles} from "../../assets/styles/commonStyles";
 import LoadingMsg from "../../components/LoadingMsg";
@@ -64,6 +64,10 @@ const SearchScreen = () => {
         }
     };
 
+    const handleCancelReservation = (item) => {
+        console.log('Reservation cancelled');
+    };
+
 
     return (
         <View style={profileStyles.container}>
@@ -78,6 +82,7 @@ const SearchScreen = () => {
                                         key={item.offerId}
                                         offer={item}
                                         navigation={navigation}
+                                        onCancel={handleCancelReservation}
                                     />
                                 ))}
                             </ScrollView>

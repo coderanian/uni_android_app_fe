@@ -134,8 +134,14 @@ export const authentificationStyles = StyleSheet.create({
     },
     button: {
         width: '100%',
-        // backgroundColor: 'grey',
         backgroundColor: '#006500',
+        padding: 15,
+        borderRadius: 5,
+        marginBottom: "5%"
+    },
+    buttonSecondary: {
+        width: '100%',
+        backgroundColor: 'grey',
         padding: 15,
         borderRadius: 5,
         marginBottom: "5%"
@@ -186,8 +192,7 @@ export const profileStyles = StyleSheet.create({
     },
     propertyValue: {
         fontWeight: "bold",
-        fontSize: 18,
-        textTransform: "capitalize"
+        fontSize: 18
     },
     imgContainer: {
         flex: 1,

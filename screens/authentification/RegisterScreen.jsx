@@ -16,7 +16,6 @@ const RegisterScreen = ({navigation}) => {
     const [isChecked, setChecked] = useState(false);
     const {onLogin, onRegister} = useAuth();
     const register = async () => {
-        console.log(username, email, password, isChecked)
         if (!username || !email || !password || !isChecked) {
             Alert.alert("Fehler", "Bitte überprüfe deine Eingaben!");
         } else {
@@ -38,6 +37,11 @@ const RegisterScreen = ({navigation}) => {
                 name: "Log-In",
             });
         }
+    }
+    const cancelRegistration = () => {
+        navigation.navigate({
+            name: "Log-In"
+        })
     }
 
     return (
@@ -71,6 +75,12 @@ const RegisterScreen = ({navigation}) => {
                 onPress={register}
             >
                 <Text style={authentificationStyles.buttonText}>Registrieren</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={authentificationStyles.buttonSecondary}
+                onPress={cancelRegistration}
+            >
+                <Text style={authentificationStyles.buttonText}>Abbrechen</Text>
             </TouchableOpacity>
         </View>
     )

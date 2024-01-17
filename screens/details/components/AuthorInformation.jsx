@@ -2,17 +2,11 @@ import React, {useEffect, useState} from "react";
 import {View, Text, Image, ScrollView, Alert} from "react-native";
 import {profileStyles, searchStyles} from "../../../assets/styles/commonStyles";
 import defaultAvatar from "../../../assets/images/avatar_template.jpg";
-import {accessLocation} from "../../../services/accessLocation";
 import {useAuth} from "../../../context/AuthContext";
 import {useIsFocused, useNavigation} from "@react-navigation/native";
 import LoadingMsg from "../../../components/LoadingMsg";
-import EmptyState from "../../../components/EmptyState";
-import Offer from "../../../components/Offer/Offer";
 import {offerStyle} from "../../../assets/styles/offerStyle";
-import ReservationButton from "../../../components/Input/ReservationButton";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import {MenuProvider} from "react-native-popup-menu";
-import {OfferInformation} from "./index";
 import {findOfferTypeKey} from "../../../utils/offerTranslation";
 
 const AuthorInformation = ({route}) => {
@@ -69,9 +63,10 @@ const AuthorInformation = ({route}) => {
             {isLoading
                 ? <LoadingMsg/>
                 : (offerList.map((offer) =>(
-                    <MenuProvider skipInstanceCheck key={offer.id}>
-                        <View style={offerStyle.authorContainer} key={offer.id}>
-                            <View style={offerStyle.innercontainer} key={offer.id}>
+
+                    <View key={offer.offerId}>
+                        <View style={offerStyle.authorContainer}>
+                            <View style={offerStyle.innercontainer}>
                                 {offer.productPic ? (
                                     <Image style={offerStyle.img} source={{uri: offer.productPic}}/>
                                 ) : (
@@ -91,7 +86,7 @@ const AuthorInformation = ({route}) => {
                                 onPress={() => navigation.navigate("Details", {offer: offer})}
                             />
                         </View>
-                    </MenuProvider>
+                    </View>
                 )))
             }
         </ScrollView>

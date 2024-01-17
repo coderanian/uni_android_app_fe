@@ -2,7 +2,8 @@ import {StyleSheet} from "react-native";
 
 export const offerStyle = StyleSheet.create({
     container: {
-        paddingHorizontal: "10%",
+        paddingLeft: "10%",
+        paddingRight: "5%",
         paddingVertical: "5%",
         backgroundColor: "white",
         borderBottomWidth: 1,
@@ -17,18 +18,17 @@ export const offerStyle = StyleSheet.create({
     },
     innercontainer: {
         flexDirection: "row",
-        alignItems: "center",
         flexWrap: "wrap",
     },
     img: {
         width: 90,
         height: 90,
-        marginRight: "10%",
+        marginRight: "5%",
     },
     imgTemplate: {
         width: 90,
         height: 90,
-        marginRight: "10%",
+        marginRight: "5%",
         backgroundColor: "grey"
     },
     textContainer: {
@@ -40,6 +40,7 @@ export const offerStyle = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
         marginBottom: 5,
+        marginRight: "10%",
     },
     text: {
         fontSize: 14,
@@ -51,24 +52,11 @@ export const offerStyle = StyleSheet.create({
         top: 0,
         right: 0
     },
-    menu: {
-        borderWidth: 1,
-        borderColor: "grey",
-        zIndex: 10000
-    },
-    menuItem: {
-        padding: 12,
-        borderBottomWidth: 1,
-        borderBottomColor: "grey",
-    },
     btn: {
-        position: "absolute",
-        top: 0,
-        right: 0,
         padding: 15,
     },
     btnIcon: {
-        fontSize: 24
+        fontSize: 24,
     },
     statusContainer: {
         flex: 1,
