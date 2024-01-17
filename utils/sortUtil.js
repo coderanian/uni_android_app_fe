@@ -1,14 +1,10 @@
 export function sortByAttribute(arr, attribute, sortOrder = 'asc') {
     if (!arr || !Array.isArray(arr) || arr.length === 0) {
-        console.error('Ungültiges Array.');
         return [];
     }
-
     if (!attribute || typeof attribute !== 'string') {
-        console.error('Ungültiges Attribut.');
         return arr;
     }
-
     const isAscending = sortOrder.toLowerCase() === 'asc';
 
     /**
