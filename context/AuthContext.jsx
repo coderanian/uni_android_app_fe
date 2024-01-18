@@ -59,7 +59,6 @@ export const AuthProvider = ({children}) => {
                 {email, name, password}
             );
         } catch (e) {
-            console.log(e)
             return {error: true, status: e.response.status.toString(), msg: e.response.data};
         }
     };
@@ -82,7 +81,7 @@ export const AuthProvider = ({children}) => {
      */
     const putUser = async (name, email, newPw, picture, location) => {
         try {
-            const newPassword = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, newPw);
+            const newPassword = !!newPw ? await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, newPw) : null;
             return await axios.put(apiUriFactory(
                 "profile"),
                 {name, email, newPassword, picture, location}
@@ -98,9 +97,9 @@ export const AuthProvider = ({children}) => {
      * @param pw input
      * @returns server response
      */
-    const login = async (email, pw) => {
+    const login = async (email, password) => {
         try {
-            const password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, pw);
+         //   const password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, pw);
             const result = await axios.post(apiUriFactory('login'), {email, password});
             setAuthState({
                 token: result.data.token,
@@ -135,13 +134,11 @@ export const AuthProvider = ({children}) => {
         title, description, category, quantity, priceType, price, productPic
     ) => {
         try {
-            console.log("test");
             return await axios.post(apiUriFactory(
                     "offers"),
                 {title, description, category, quantity, priceType, price, productPic}
             );
         } catch (e) {
-            console.log(e);
             return {error: true, status: e.response.status.toString(), msg: e.response.data.error};
         }
     }

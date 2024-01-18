@@ -89,7 +89,6 @@ const AddStockScreen = ({navigation}) => {
                     onChangeInput={(input) => {
                         setPriceType(input);
                         setPrice(input === "TRADE" ? "" : 0);
-                        console.log(price);
                     }}
                 />
                 <Text style={commonStyles.title}>
