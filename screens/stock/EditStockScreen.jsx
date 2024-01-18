@@ -7,6 +7,7 @@ import CustomTextInput from "../../components/Input/CustomTextInput";
 import CustomDropdownInput from "../../components/Input/CustomDropdownInput";
 import {offerCategories, offerTypes} from "../../utils/constants";
 import CurrencyInput from "react-native-currency-input";
+import ReturnButton from "../../components/Input/ReturnButton";
 
 const EditStockScreen = ({navigation, route}) => {
     const {offer} = route.params;

@@ -2,6 +2,7 @@ import React, {createContext, useContext, useEffect, useState} from 'react';
 import axios from "axios";
 import {apiUriFactory} from "../services/apiUriFactory";
 import * as SecureStore from 'expo-secure-store';
+import * as Crypto from 'expo-crypto';
 
 const TOKEN_KEY = 'jwt';
 //Creates context object to pass data related to authentication throughout the component tree
@@ -52,6 +53,7 @@ export const AuthProvider = ({children}) => {
      */
     const register = async (email, name, password) => {
         try {
+            //const pwHashed = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, password);
             return await axios.post(
                 apiUriFactory('register'),
                 {email, name, password}
@@ -80,6 +82,7 @@ export const AuthProvider = ({children}) => {
      */
     const putUser = async (name, email, newPassword, picture, location) => {
         try {
+            //const pwHashed = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, newPassword);
             return await axios.put(apiUriFactory(
                 "profile"),
                 {name, email, newPassword, picture, location}
@@ -97,6 +100,7 @@ export const AuthProvider = ({children}) => {
      */
     const login = async (email, password) => {
         try {
+            //const pwHashed = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, password);
             const result = await axios.post(apiUriFactory('login'), {email, password});
             setAuthState({
                 token: result.data.token,

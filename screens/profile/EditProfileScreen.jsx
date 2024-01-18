@@ -9,6 +9,7 @@ import PasswordInput from "../../components/Input/PasswordInput";
 import {accessLocation} from "../../services/accessLocation";
 import {accessCamera} from "../../services/accessCamera";
 import defaultAvatar from '../../assets/images/avatar_template.jpg'
+import ReturnButton from "../../components/Input/ReturnButton";
 
 /**
  * Prefills input data with my-profile response

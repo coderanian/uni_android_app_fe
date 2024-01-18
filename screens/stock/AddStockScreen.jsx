@@ -7,6 +7,7 @@ import {offerCategories, offerTypes} from '../../utils/constants'
 import CustomDropdownInput from "../../components/Input/CustomDropdownInput";
 import CurrencyInput from "react-native-currency-input";
 import {useAuth} from "../../context/AuthContext";
+import ReturnButton from "../../components/Input/ReturnButton";
 
 const AddStockScreen = ({navigation}) => {
     const {onPostOffer, onLogout} = useAuth();

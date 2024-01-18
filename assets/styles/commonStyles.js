@@ -223,6 +223,15 @@ export const stockStyles = StyleSheet.create({
         flex: 1,
     },
     btnContainer: {
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: "10%"
+    },
+    listContainer: {
+        marginBottom: "5%"
+    },
+    btnContainerFixed: {
         position: "absolute",
         width: '100%',
         left: 0,
@@ -230,7 +239,7 @@ export const stockStyles = StyleSheet.create({
         bottom: 0,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingHorizontal: "10%"
+        paddingHorizontal: "10%",
     },
     button: {
         width: '100%',

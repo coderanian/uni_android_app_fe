@@ -5,6 +5,7 @@ import Checkbox from 'expo-checkbox';
 import CustomTextInput from "../../components/Input/CustomTextInput";
 import PasswordInput from "../../components/Input/PasswordInput";
 import {useAuth} from "../../context/AuthContext";
+import ReturnButton from "../../components/Input/ReturnButton";
 
 /**
  * Registration screen in the authorization stack
@@ -37,11 +38,6 @@ const RegisterScreen = ({navigation}) => {
                 name: "Log-In",
             });
         }
-    }
-    const cancelRegistration = () => {
-        navigation.navigate({
-            name: "Log-In"
-        })
     }
 
     return (
@@ -76,12 +72,7 @@ const RegisterScreen = ({navigation}) => {
             >
                 <Text style={authentificationStyles.buttonText}>Registrieren</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-                style={authentificationStyles.buttonSecondary}
-                onPress={cancelRegistration}
-            >
-                <Text style={authentificationStyles.buttonText}>Abbrechen</Text>
-            </TouchableOpacity>
+            <ReturnButton navigation={navigation}/>
         </View>
     )
 }

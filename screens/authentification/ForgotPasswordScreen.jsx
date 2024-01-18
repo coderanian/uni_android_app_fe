@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {View, Text, TextInput, TouchableOpacity, Alert} from "react-native";
 import {authentificationStyles} from "../../assets/styles/commonStyles";
+import ReturnButton from "../../components/Input/ReturnButton";
 
 /**
  * Password retrieval in the authorization stack
@@ -20,11 +21,6 @@ const ForgotPasswordScreen = ({navigation}) => {
     }
   }
 
-    const cancel = () => {
-        navigation.navigate({
-            name: "Log-In"
-        })
-    }
   return (
     <View style={authentificationStyles.container}>
       <Text style={authentificationStyles.header}>Passwort vergessen</Text>
@@ -42,12 +38,7 @@ const ForgotPasswordScreen = ({navigation}) => {
       >
         <Text style={authentificationStyles.buttonText}>Passwort wiederherstellen</Text>
       </TouchableOpacity>
-        <TouchableOpacity
-            style={authentificationStyles.buttonSecondary}
-            onPress={cancel}
-        >
-            <Text style={authentificationStyles.buttonText}>Abbrechen</Text>
-        </TouchableOpacity>
+      <ReturnButton navigation={navigation}/>
     </View>
   )
 }

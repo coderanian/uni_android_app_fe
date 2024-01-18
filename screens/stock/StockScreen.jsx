@@ -1,4 +1,4 @@
-import {Alert, ScrollView, Text, TouchableOpacity, View} from "react-native";
+import {Alert, ScrollView, Text, TouchableOpacity, View, Dimensions} from "react-native";
 import React, {useEffect, useState} from "react";
 import {authentificationStyles, profileStyles, stockStyles} from "../../assets/styles/commonStyles";
 import {useAuth} from "../../context/AuthContext";
@@ -12,6 +12,9 @@ const StockScreen = () => {
     const {onGetMyOffers, onLogout} = useAuth();
     const [offerList, setOfferList] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [offerListHeight, setOfferListHeight] = useState(0);
+    const [windowHeight, setWindowHeight] = useState(0);
+    //const windowHeight = Dimensions.get("window").height;
 
     const navigation = useNavigation();
     const route = useRoute();
@@ -56,32 +59,52 @@ const StockScreen = () => {
     };
 
     return (
-        <View style={profileStyles.container}>
+        <View
+            style={profileStyles.container}
+            onLayout={(event) => setWindowHeight(event.nativeEvent.layout.height)}
+        >
             {isLoading
                 ? <LoadingMsg/>
                 : (offerList && offerList.length === 0
                         ? (<EmptyState message={"Noch keine Angebote erstellt"}></EmptyState>)
                         : (
                             <ScrollView>
-                                {offerList.map((item) => (
-                                    <MyOffer
-                                        key={item.offerId}
-                                        offer={item}
-                                        navigation={navigation}
-                                    />
-                                ))}
+                                <View
+                                    onLayout={(event) => setOfferListHeight(event.nativeEvent.layout.height)}
+                                    style={stockStyles.listContainer}
+                                >
+                                    {offerList.map((item) => (
+                                        <MyOffer
+                                            key={item.offerId}
+                                            offer={item}
+                                            navigation={navigation}
+                                        />
+                                    ))}
+                                </View>
+                                {(offerListHeight / windowHeight) > 0.7 &&
+                                    <View style={stockStyles.btnContainer}>
+                                        <TouchableOpacity
+                                            style={stockStyles.button}
+                                            onPress={() => navigation.navigate('Neues Angebot')}
+                                        >
+                                            <Text style={authentificationStyles.buttonText}>Neues Angebot</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                }
                             </ScrollView>
                         )
                 )
             }
-            <View style={stockStyles.btnContainer}>
-                <TouchableOpacity
-                    style={stockStyles.button}
-                    onPress={() => navigation.navigate('Neues Angebot')}
-                >
-                    <Text style={authentificationStyles.buttonText}>Neues Angebot</Text>
-                </TouchableOpacity>
-            </View>
+            {(offerListHeight / windowHeight) < 0.7 &&
+                <View style={stockStyles.btnContainerFixed}>
+                    <TouchableOpacity
+                        style={stockStyles.button}
+                        onPress={() => navigation.navigate('Neues Angebot')}
+                    >
+                        <Text style={authentificationStyles.buttonText}>Neues Angebot</Text>
+                    </TouchableOpacity>
+                </View>
+            }
         </View>
     )
 }
