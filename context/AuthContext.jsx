@@ -48,12 +48,12 @@ export const AuthProvider = ({children}) => {
      * Fetch response from post request for registration
      * @param email input
      * @param name input
-     * @param password input
+     * @param pw input
      * @returns server response
      */
-    const register = async (email, name, password) => {
+    const register = async (email, name, pw) => {
         try {
-            //const pwHashed = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, password);
+            const password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, pw);
             return await axios.post(
                 apiUriFactory('register'),
                 {email, name, password}
@@ -80,9 +80,9 @@ export const AuthProvider = ({children}) => {
      * Update profile data of user id
      * @returns server response
      */
-    const putUser = async (name, email, newPassword, picture, location) => {
+    const putUser = async (name, email, newPw, picture, location) => {
         try {
-            //const pwHashed = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, newPassword);
+            const newPassword = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, newPw);
             return await axios.put(apiUriFactory(
                 "profile"),
                 {name, email, newPassword, picture, location}
@@ -95,12 +95,12 @@ export const AuthProvider = ({children}) => {
     /**
      * Fetch response from login post request
      * @param email input
-     * @param password input
+     * @param pw input
      * @returns server response
      */
-    const login = async (email, password) => {
+    const login = async (email, pw) => {
         try {
-            //const pwHashed = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, password);
+            const password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, pw);
             const result = await axios.post(apiUriFactory('login'), {email, password});
             setAuthState({
                 token: result.data.token,
