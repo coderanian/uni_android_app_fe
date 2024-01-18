@@ -21,7 +21,7 @@ const MyOffer = ({offer, navigation}) => {
     const closeMenu = () => setVisible(false);
 
     const deleteOffer = async () => {
-        let sold = !!offer.reservedBy;
+        let sold = remainingTime > 0;
         const result = await onDeleteOffer(offer.offerId, sold);
         if(result && result.error){
             if (result.status.toString() === '403') {
