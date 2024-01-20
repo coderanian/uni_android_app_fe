@@ -97,9 +97,9 @@ export const AuthProvider = ({children}) => {
      * @param pw input
      * @returns server response
      */
-    const login = async (email, password) => {
+    const login = async (email, pw) => {
         try {
-         //   const password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, pw);
+            const password = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, pw);
             const result = await axios.post(apiUriFactory('login'), {email, password});
             setAuthState({
                 token: result.data.token,
