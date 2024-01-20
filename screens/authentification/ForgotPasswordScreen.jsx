@@ -15,7 +15,8 @@ const ForgotPasswordScreen = ({navigation}) => {
       navigation.navigate({
         name: "Log-In",
         params: {msg: "Neues Passwort wurde an deine Email versendet."}
-      })
+      });
+        Alert.alert("Hinweis", "Diese Funktion steht zur Zeit nicht zu Verfügung");
     } else {
       Alert.alert("Fehler", "Bitte überprüfe deine Eingaben!");
     }
