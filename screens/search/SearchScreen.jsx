@@ -45,6 +45,7 @@ const SearchScreen = () => {
     }, [navigation]);
 
     const loadOffers = async () => {
+        setIsLoading(true);
         const location = await accessLocation();
         const result = await onGetOffers(location, filterParams);
         if (result && result.error) {

@@ -7,6 +7,7 @@ import {searchStyles} from "../../assets/styles/commonStyles";
 import MapComponent from "../MapComponent";
 import ReservationButton from "../Input/ReservationButton";
 import {findOfferTypeKey} from "../../utils/offerTranslation";
+import PlaceholderImage from "../../assets/images/no_pic.png";
 
 /**
  * Element of offer list
@@ -29,7 +30,7 @@ const Offer = ({offer, navigation, onCancel}) => {
                     {offer.productPic ? (
                         <Image style={offerStyle.img} source={{uri: offer.productPic}}/>
                     ) : (
-                        <View style={offerStyle.imgTemplate}/>
+                        <Image style={offerStyle.img} source={PlaceholderImage}/>
                     )}
                     <View style={offerStyle.textContainer}>
                         <Text style={offerStyle.title}>{offer.title}</Text>

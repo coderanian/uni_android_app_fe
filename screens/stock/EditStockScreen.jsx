@@ -8,6 +8,7 @@ import CustomDropdownInput from "../../components/Input/CustomDropdownInput";
 import {offerCategories, offerTypes} from "../../utils/constants";
 import CurrencyInput from "react-native-currency-input";
 import ReturnButton from "../../components/Input/ReturnButton";
+import {useSnackbar} from "../../context/SnackbarContext";
 
 const EditStockScreen = ({navigation, route}) => {
     const {offer} = route.params;
@@ -20,6 +21,8 @@ const EditStockScreen = ({navigation, route}) => {
     const [priceType, setPriceType] = useState(offer.priceType);
     const [price, setPrice] = useState(offer.price);
     const [productPic, setProductPic] = useState(offer.productPic);
+
+    const { showSnackbar } = useSnackbar();
 
     const update = async () => {
         if(!title || !category || !quantity || !priceType || price === null){
@@ -34,8 +37,8 @@ const EditStockScreen = ({navigation, route}) => {
                     Alert.alert(result.status, result.msg);
                 }
             } else {
+                showSnackbar('Angebot wurde aktualisiert');
                 navigation.goBack();
-                Alert.alert("Angebot", "Angebot erfolgreich bearbeitet!")
             }
         }
     }

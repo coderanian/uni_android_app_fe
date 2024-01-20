@@ -4,6 +4,7 @@ import {profileStyles, stockStyles} from "../../../assets/styles/commonStyles";
 import ReservationButton from "../../../components/Input/ReservationButton";
 import {findOfferTypeKey} from "../../../utils/offerTranslation";
 import {offerTypes} from "../../../utils/constants";
+import PlaceholderImage from "../../../assets/images/no_pic.png";
 
 const OfferInformation = ({route}) => {
     const [offer, setOffer] = useState(route.params.offer ?? route.params);
@@ -20,7 +21,7 @@ const OfferInformation = ({route}) => {
             {offer.productPic ? (
                 <Image style={stockStyles.imgTemplate} source={{uri: offer.productPic}}/>
             ) : (
-                <View style={stockStyles.imgTemplate}/>
+                <Image style={stockStyles.imgTemplate} source={PlaceholderImage}/>
             )}
             <View>
                 <View style={profileStyles.detailsContainer}>

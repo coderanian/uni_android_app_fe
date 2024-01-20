@@ -8,9 +8,11 @@ import CustomDropdownInput from "../../components/Input/CustomDropdownInput";
 import CurrencyInput from "react-native-currency-input";
 import {useAuth} from "../../context/AuthContext";
 import ReturnButton from "../../components/Input/ReturnButton";
+import {useSnackbar} from "../../context/SnackbarContext";
 
 const AddStockScreen = ({navigation}) => {
     const {onPostOffer, onLogout} = useAuth();
+    const { showSnackbar } = useSnackbar();
     const [title, setTitle] = useState(null);
     const [category, setCategory] = useState(null);
     const [quantity, setQuantity] = useState(null);
@@ -32,8 +34,8 @@ const AddStockScreen = ({navigation}) => {
                     Alert.alert(result.status, result.msg);
                 }
             } else {
+                showSnackbar('Angebot erfolgreich erstellt!');
                 navigation.goBack();
-                Alert.alert("Neues Angebot", "Angebot erfolgreich erstellt!")
             }
         }
     }

@@ -5,9 +5,11 @@ import {Alert, Text, TouchableOpacity, View} from "react-native";
 import {offerStyle} from "../../assets/styles/offerStyle";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {searchStyles} from "../../assets/styles/commonStyles";
+import {useSnackbar} from "../../context/SnackbarContext";
 
 const ReservationButton = ({offer, onCancel}) => {
     const {onReserveOffer, onCancelReservation, onLogout} = useAuth();
+    const { showSnackbar } = useSnackbar();
     const [remainingTime, setRemainingTime] = useState(calcTime(offer.reservation?.reservationTimestamp ?? null));
 
     const reserveOffer = async () => {
@@ -22,6 +24,7 @@ const ReservationButton = ({offer, onCancel}) => {
         } else {
             offer.reservation = result.data;
             setRemainingTime(calcTime(result.data.reservationTimestamp));
+            showSnackbar("Angebot wurde reserviert");
         }
     }
 
@@ -37,6 +40,7 @@ const ReservationButton = ({offer, onCancel}) => {
         } else {
             offer.reservation.reservationTimestamp = new Date().toISOString();
             setRemainingTime(offer.reservation.reservationTimestamp);
+            showSnackbar("Reservierung wurde storniert");
             onCancel(offer)
         }
     }
@@ -64,7 +68,7 @@ const ReservationButton = ({offer, onCancel}) => {
                     style={searchStyles.buttoncancel}
                     onPress={cancelReservation}
                     underlayColor='#fff'>
-                    <Text style={searchStyles.buttonText}>Cancel Reservieren</Text>
+                    <Text style={searchStyles.buttonText}>Reservierung stornieren</Text>
                 </TouchableOpacity>
             </View> : <TouchableOpacity
                 style={searchStyles.button}

@@ -7,6 +7,7 @@ import {useAuth} from "../../context/AuthContext";
 import {calcTime} from "../../utils/calcTime";
 import {findOfferTypeKey} from "../../utils/offerTranslation";
 import {Menu} from "react-native-paper";
+import PlaceholderImage from "../../assets/images/no_pic.png";
 
 /**
  * Element of offer list
@@ -70,7 +71,7 @@ const MyOffer = ({offer, navigation}) => {
                     {offer.productPic ? (
                         <Image style={offerStyle.img} source={{uri: offer.productPic}}/>
                     ) : (
-                        <View style={offerStyle.imgTemplate}/>
+                        <Image style={offerStyle.img} source={PlaceholderImage}/>
                     )}
                     <View style={offerStyle.textContainer}>
                         <Text style={offerStyle.title}>{offer.title}</Text>

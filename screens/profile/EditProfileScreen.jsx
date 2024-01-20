@@ -10,6 +10,7 @@ import {accessLocation} from "../../services/accessLocation";
 import {accessCamera} from "../../services/accessCamera";
 import defaultAvatar from '../../assets/images/avatar_template.jpg'
 import ReturnButton from "../../components/Input/ReturnButton";
+import {useSnackbar} from "../../context/SnackbarContext";
 
 /**
  * Prefills input data with my-profile response
@@ -22,6 +23,7 @@ import ReturnButton from "../../components/Input/ReturnButton";
  */
 const EditProfileScreen = ({navigation}) => {
     const {onGetUser, onLogout, onPutUser} = useAuth();
+    const { showSnackbar } = useSnackbar();
     const [userData, setUserData] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     //Input form states
@@ -85,7 +87,7 @@ const EditProfileScreen = ({navigation}) => {
         if (result && result.error) {
             Alert.alert(result.status, result.msg);
         } else {
-            Alert.alert("Profil", "Änderungen wurden gespeichert!")
+            showSnackbar("Änderungen wurden gespeichert!");
             navigation.goBack();
         }
     }
