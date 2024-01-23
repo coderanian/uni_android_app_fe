@@ -96,3 +96,5 @@ c). For local app emulation via Expo Go app:
 - Dropdown selection input box
 16. React-Native-Popup-Menu:
 - Custom popup menu in offers
+17. EAS Build:
+- Hosted service for building apps for Expo / React-Native projects

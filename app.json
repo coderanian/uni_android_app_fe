@@ -17,10 +17,16 @@
     },
     "android": {
       "adaptiveIcon": {
+        "foregroundImage": "./assets/images/png_busash_icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.clone6921.test"
     },
-    "web": {
+    "web": {},
+    "extra": {
+      "eas": {
+        "projectId": "13d9fc40-5a31-4fec-ae76-de8681d9367d"
+      }
     }
   }
 }
