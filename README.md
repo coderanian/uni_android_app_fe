@@ -4,6 +4,7 @@ A React Native application. Table of contents:
 2. [Structure](#structure)
 3. [Installation](#installation)
 4. [Package Usage](#package-usage)
+5. [App Screenshots](#app-screenshots)
 
 ## Introduction and Features of Andoird app BUSASH
 This is frontend application based on React Native for university Android development class. Backend application bootstrapped by Spring and coded in Kotlin is available in separate repository.
@@ -112,3 +113,12 @@ This frontend application was bootstrapped with:
 - Custom popup menu in offers
 17. EAS Build:
 - Hosted service for building apps for Expo / React-Native projects
+
+## App Screenshots
+
+![busash_screenshot_offer_sortfilter](https://github.com/wrigglingmoray/uni_android_app_fe/assets/89016793/83bd859b-27e5-40be-966d-17515d4ce6e0)
+![busash_screenshot_offer_sortfilter](https://github.com/wrigglingmoray/uni_android_app_fe/assets/89016793/83bd859b-27e5-40be-966d-17515d4ce6e0)
+![busash_screenshot_offer_reserved](https://github.com/wrigglingmoray/uni_android_app_fe/assets/89016793/667ad961-ebe3-4294-98f1-0f115a436192)
+![busash_screenshot_offer_search](https://github.com/wrigglingmoray/uni_android_app_fe/assets/89016793/7109fc5f-c06c-4b54-8613-a447cb340008)
+![busash_screenshot_offer_new](https://github.com/wrigglingmoray/uni_android_app_fe/assets/89016793/9abdd7d5-65c9-437f-a89c-493018001c8f)
+![busash_screenshot_user](https://github.com/wrigglingmoray/uni_android_app_fe/assets/89016793/c19a87e2-2191-4f1f-b749-67569379e940)
